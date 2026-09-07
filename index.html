@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Australian Citizenship Practice — 200+ câu</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
 <style>
   :root{
     --green:#2e6b5e; --green-d:#1f4d43; --sand:#f4efe6; --ink:#22302c;
@@ -112,6 +113,7 @@
   }
   .audioBtn:active{background:#eef3f1}
   .audioBtn.playing{background:var(--green);color:#fff}
+  .audioBtn i{font-size:15px}
   .lesson-vi .audioBtn{border-color:#8a9b8a}
   /* image toggle */
   .imgToggle{
@@ -821,6 +823,46 @@ function stripHtml(html){
   return tmp.textContent||tmp.innerText||'';
 }
 
+// =================== VOICE SELECTION (more expressive prosody) ===================
+let cachedVoices = [];
+function loadVoices(){
+  cachedVoices = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
+}
+if('speechSynthesis' in window){
+  loadVoices();
+  window.speechSynthesis.onvoiceschanged = loadVoices;
+}
+// Prefer natural-sounding engines (Google/Natural/Neural) over the flat default voices.
+function pickVoice(lang){
+  if(!cachedVoices.length) loadVoices();
+  const prefix = lang.split('-')[0];
+  const sameLang = cachedVoices.filter(v=>v.lang && v.lang.toLowerCase().startsWith(prefix));
+  const rank = v => {
+    const n = v.name.toLowerCase();
+    if(n.includes('google')) return 0;
+    if(n.includes('natural') || n.includes('neural')) return 1;
+    if(v.lang.toLowerCase()===lang.toLowerCase()) return 2;
+    return 3;
+  };
+  sameLang.sort((a,b)=>rank(a)-rank(b));
+  return sameLang[0] || null;
+}
+// Tuning per language so the read-aloud has more inflection (nhấn nhá) instead of a flat monotone.
+const VOICE_TUNING = {
+  'en-AU': {rate:0.93, pitch:1.06},
+  'vi-VN': {rate:0.9,  pitch:1.12}
+};
+function applyVoiceTuning(utter, lang){
+  const t = VOICE_TUNING[lang] || {rate:0.95, pitch:1};
+  utter.rate = t.rate;
+  utter.pitch = t.pitch;
+  const v = pickVoice(lang);
+  if(v) utter.voice = v;
+}
+
+const ICON_SPEAKER = '<i class="ph ph-speaker-high"></i>';
+const ICON_PAUSE = '<i class="ph ph-pause"></i>';
+
 let currentUtterance=null;
 function speakText(text, lang, btnEl){
   if(!('speechSynthesis' in window)){
@@ -837,12 +879,12 @@ function speakText(text, lang, btnEl){
   resetAllAudioBtns();
   const utter = new SpeechSynthesisUtterance(text);
   utter.lang = lang;
-  utter.rate = 0.95;
+  applyVoiceTuning(utter, lang);
   currentUtterance = utter;
   if(btnEl){
     btnEl.dataset.playing='1';
     btnEl.classList.add('playing');
-    btnEl.textContent = '⏸';
+    btnEl.innerHTML = ICON_PAUSE;
   }
   utter.onend = utter.onerror = ()=>resetAllAudioBtns();
   window.speechSynthesis.speak(utter);
@@ -851,7 +893,7 @@ function resetAllAudioBtns(){
   document.querySelectorAll('.audioBtn').forEach(b=>{
     b.dataset.playing='0';
     b.classList.remove('playing');
-    b.textContent = b.dataset.label || '🔊';
+    b.innerHTML = b.dataset.label || ICON_SPEAKER;
   });
 }
 
@@ -929,7 +971,7 @@ function playReadQueue(){
   const item = readQueue[readQueueIdx];
   const utter = new SpeechSynthesisUtterance(item.text);
   utter.lang = item.lang;
-  utter.rate = 0.95;
+  applyVoiceTuning(utter, item.lang);
   utter.onend = ()=>{
     if(!readQueuePlaying)return; // stopped by user
     readQueueIdx++;
@@ -966,11 +1008,11 @@ function pauseResumeReadAll(){
   if(window.speechSynthesis.speaking && !window.speechSynthesis.paused){
     window.speechSynthesis.pause();
     const btn=document.getElementById('readPauseBtn');
-    if(btn)btn.textContent='▶ Tiếp tục';
+    if(btn)btn.innerHTML='<i class="ph ph-play"></i> Tiếp tục';
   }else if(window.speechSynthesis.paused){
     window.speechSynthesis.resume();
     const btn=document.getElementById('readPauseBtn');
-    if(btn)btn.textContent='⏸ Tạm dừng';
+    if(btn)btn.innerHTML='<i class="ph ph-pause"></i> Tạm dừng';
   }
 }
 
@@ -986,7 +1028,7 @@ function stopReadAll(){
 function renderReadAllButtons(key){
   return `
     <div class="readModeRow">
-      <button class="btn sm" onclick="startReadAll('${key}','both')">🔊 Đọc toàn bộ (Anh + Việt)</button>
+      <button class="btn sm" onclick="startReadAll('${key}','both')">${ICON_SPEAKER} Đọc toàn bộ (Anh + Việt)</button>
     </div>
     <div class="grid2" style="margin-top:8px">
       <button class="btn ghost sm" onclick="startReadAll('${key}','en')">🇬🇧 Chỉ tiếng Anh</button>
@@ -1005,8 +1047,8 @@ function renderReadAllControls(key, mode, playing){
       <div class="bar"><i id="readProgressBar" style="width:0%;background:#c9a227"></i></div>
       <div class="small" id="readProgressLbl" style="text-align:left;margin:4px 0 10px">Đang đọc: 1/${readQueue.length}</div>
       <div class="grid2">
-        <button class="btn ghost sm" id="readPauseBtn" onclick="pauseResumeReadAll()">⏸ Tạm dừng</button>
-        <button class="btn ghost sm" style="color:#c0392b;border-color:#c0392b" onclick="stopReadAll()">■ Dừng hẳn</button>
+        <button class="btn ghost sm" id="readPauseBtn" onclick="pauseResumeReadAll()"><i class="ph ph-pause"></i> Tạm dừng</button>
+        <button class="btn ghost sm" style="color:#c0392b;border-color:#c0392b" onclick="stopReadAll()"><i class="ph ph-stop"></i> Dừng hẳn</button>
       </div>
     </div>`;
 }
@@ -1078,12 +1120,12 @@ function showLesson(key){
     secHtml += `<div class="lesson-sec">
       <div class="lesson-en">
         ${s.en}
-        <button class="audioBtn" id="${enId}" title="Nghe tiếng Anh" data-label="🔊" data-playing="0" data-text="${enText}" data-lang="en-AU" onclick="speakText(this.dataset.text,this.dataset.lang,this)">🔊</button>
+        <button class="audioBtn" id="${enId}" title="Nghe tiếng Anh" data-playing="0" data-text="${enText}" data-lang="en-AU" onclick="speakText(this.dataset.text,this.dataset.lang,this)">${ICON_SPEAKER}</button>
       </div>
       ${renderImgBlock(s, i, key)}
       <div class="lesson-vi">
         ${s.vi}
-        <button class="audioBtn" id="${viId}" title="Nghe tiếng Việt" data-label="🔊" data-playing="0" data-text="${viText}" data-lang="vi-VN" onclick="speakText(this.dataset.text,this.dataset.lang,this)">🔊</button>
+        <button class="audioBtn" id="${viId}" title="Nghe tiếng Việt" data-playing="0" data-text="${viText}" data-lang="vi-VN" onclick="speakText(this.dataset.text,this.dataset.lang,this)">${ICON_SPEAKER}</button>
       </div>
     </div>`;
   });
@@ -1097,7 +1139,7 @@ function showLesson(key){
     <h2>${L.titleVi}</h2>
     <p class="lead" style="opacity:.75;margin-top:-8px">${L.title}</p>
     <div class="readAllCard" id="readAllPanel">${renderReadAllButtons(key)}</div>
-    <p class="small" style="text-align:left;margin:12px 0 10px">💡 Bấm 🔊 để nghe từng đoạn riêng, bấm 🖼 để xem hình minh hoạ (nếu có).</p>
+    <p class="small" style="text-align:left;margin:12px 0 10px">💡 Bấm <i class="ph ph-speaker-high"></i> để nghe từng đoạn riêng, bấm 🖼 để xem hình minh hoạ (nếu có).</p>
     ${secHtml}
   </div>
   <div class="card kwcard">
