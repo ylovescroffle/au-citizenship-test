@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Australian Citizenship Practice — 200+ câu</title>
+<style>
+  :root{
+    --green:#2e6b5e; --green-d:#1f4d43; --sand:#f4efe6; --ink:#22302c;
+    --gold:#c9a227; --red:#c0392b; --ok:#2e8b57; --line:#dcd5c7; --card:#fff;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    background:var(--sand); color:var(--ink); line-height:1.5;
+    padding-bottom:40px;
+  }
+  .wrap{max-width:640px;margin:0 auto;padding:0 16px}
+  header{
+    background:var(--green); color:#fff; padding:18px 16px 16px;
+    position:sticky; top:0; z-index:10; box-shadow:0 2px 8px rgba(0,0,0,.12)
+  }
+  header .wrap{padding:0 4px}
+  h1{font-size:19px;margin:0 0 2px;font-weight:700}
+  .sub{font-size:12.5px;opacity:.9;margin:0}
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:16px; margin:14px 0; box-shadow:0 1px 3px rgba(0,0,0,.04)
+  }
+  h2{font-size:16px;margin:0 0 10px;color:var(--green-d)}
+  p.lead{font-size:14px;margin:0 0 14px}
+  .btn{
+    display:block;width:100%;border:none;border-radius:12px;padding:15px 16px;
+    font-size:15.5px;font-weight:600;cursor:pointer;margin:9px 0;text-align:left;
+    background:var(--green);color:#fff;transition:transform .05s
+  }
+  .btn:active{transform:scale(.985)}
+  .btn.alt{background:#fff;color:var(--green-d);border:1.5px solid var(--green)}
+  .btn.ghost{background:#eee6d6;color:var(--ink);border:1px solid var(--line)}
+  .btn.sm{padding:11px 14px;font-size:14px}
+  .btn .k{display:block;font-size:12px;font-weight:500;opacity:.85;margin-top:3px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .grid2 .btn{margin:0}
+  .stat{display:flex;justify-content:space-between;font-size:13px;color:#5a5a52;margin:4px 0}
+  .bar{height:8px;background:#e7e0d1;border-radius:6px;overflow:hidden;margin:6px 0 2px}
+  .bar > i{display:block;height:100%;background:var(--green);width:0}
+  .pill{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;background:#eef3f1;color:var(--green-d);margin-bottom:8px;letter-spacing:.3px}
+  .pill.values{background:#fbeecf;color:#8a6d12}
+  /* question */
+  .qmeta{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:#6b6b62;margin-bottom:8px;gap:8px}
+  .exitBtn{border:1px solid var(--line);background:#fff;color:#8a3a34;font-size:11.5px;font-weight:700;padding:5px 10px;border-radius:20px;cursor:pointer;white-space:nowrap}
+  .exitBtn:active{background:#fbeceb}
+  .timer{font-weight:700;color:var(--green-d)}
+  .timer.warn{color:var(--red)}
+  .qtext{font-size:16.5px;font-weight:600;margin:2px 0 14px;line-height:1.4}
+  .opt{
+    display:block;width:100%;text-align:left;border:1.5px solid var(--line);
+    background:#fff;border-radius:12px;padding:13px 14px;margin:8px 0;font-size:15px;
+    cursor:pointer;transition:.12s;color:var(--ink)
+  }
+  .opt:active{background:#f7f3ea}
+  .opt .lab{font-weight:700;color:var(--green);margin-right:8px}
+  .opt.correct{border-color:var(--ok);background:#eaf6ee}
+  .opt.correct .lab{color:var(--ok)}
+  .opt.wrong{border-color:var(--red);background:#fbeceb}
+  .opt.wrong .lab{color:var(--red)}
+  .opt.dim{opacity:.55}
+  .opt:disabled{cursor:default}
+  .exp{
+    background:#f0f5f3;border-left:4px solid var(--green);border-radius:0 10px 10px 0;
+    padding:11px 13px;margin:12px 0 6px;font-size:13.5px;display:none;line-height:1.55
+  }
+  .exp.show{display:block}
+  .exp .tag{font-weight:700;color:var(--green-d);font-size:12px;display:block;margin-bottom:3px}
+  .exp.bad{background:#fbeceb;border-color:var(--red)}
+  .exp.bad .tag{color:var(--red)}
+  .navrow{display:flex;gap:9px;margin-top:12px}
+  .navrow .btn{margin:0}
+  .small{font-size:12px;color:#6b6b62;text-align:center;margin:10px 0 0}
+  /* results */
+  .score-big{font-size:52px;font-weight:800;text-align:center;margin:6px 0 0;line-height:1}
+  .score-lbl{text-align:center;font-size:14px;margin:2px 0 12px}
+  .verdict{text-align:center;font-weight:800;font-size:18px;padding:10px;border-radius:12px;margin:10px 0}
+  .verdict.pass{background:#eaf6ee;color:var(--ok)}
+  .verdict.fail{background:#fbeceb;color:var(--red)}
+  .rescat{display:flex;justify-content:space-between;font-size:13.5px;padding:7px 0;border-bottom:1px solid var(--line)}
+  .rescat b{font-weight:700}
+  .foot{text-align:center;font-size:11.5px;color:#8a8a80;margin:22px 0 6px;padding:0 10px}
+  .review-q{font-size:14px;font-weight:600;margin:14px 0 6px}
+  .review-a{font-size:13px;margin:2px 0}
+  .review-a.you{color:var(--red)}
+  .review-a.corr{color:var(--ok)}
+  .badge{font-size:11px;padding:2px 7px;border-radius:8px;background:#eef3f1;color:var(--green-d);font-weight:700;margin-left:6px}
+  .reset{color:var(--red);font-size:12px;text-align:center;display:block;margin:14px auto 0;background:none;border:none;cursor:pointer;text-decoration:underline}
+  /* lesson mode */
+  .lesson-sec{padding:12px 0;border-bottom:1px solid var(--line)}
+  .lesson-sec:last-child{border-bottom:none}
+  .lesson-en{font-size:14.5px;line-height:1.6;margin-bottom:8px}
+  .lesson-vi{font-size:14px;line-height:1.65;color:#3a4a44;background:#f0f5f3;border-left:3px solid var(--green);padding:9px 12px;border-radius:0 8px 8px 0}
+  .kwcard{background:#fdf8ec;border-color:#e9d9a6}
+  .kwrow{display:flex;flex-direction:column;padding:9px 0;border-bottom:1px dashed #e0d3a0}
+  .kwrow:last-child{border-bottom:none}
+  .kw-en{font-size:13.5px;font-weight:700;color:#8a6d12}
+  .kw-vi{font-size:13px;color:#5a4a1a;margin-top:2px}
+  /* audio buttons */
+  .audioBtn{
+    display:inline-flex;align-items:center;justify-content:center;
+    margin-top:8px;margin-left:6px;font-size:15px;
+    border:1px solid var(--green);color:var(--green-d);background:#fff;
+    width:30px;height:30px;border-radius:50%;cursor:pointer;padding:0
+  }
+  .audioBtn:active{background:#eef3f1}
+  .audioBtn.playing{background:var(--green);color:#fff}
+  .lesson-vi .audioBtn{border-color:#8a9b8a}
+  /* image toggle */
+  .imgToggle{
+    display:block;width:100%;margin:8px 0 2px;font-size:12.5px;font-weight:700;
+    border:1px dashed var(--gold);color:#8a6d12;background:#fdf8ec;
+    padding:8px 10px;border-radius:10px;cursor:pointer;text-align:center
+  }
+  .imgToggle:active{background:#fbeecf}
+  .imgBox{
+    margin:8px 0 4px;padding:12px;background:#fafaf6;border:1px solid var(--line);
+    border-radius:12px;text-align:center
+  }
+  .imgSingle svg{max-width:180px;max-height:130px;width:100%;height:auto}
+  .imgCap{font-size:11.5px;color:#6b6b62;margin-top:6px}
+  .imgCredit{font-size:10px;color:#9a9a90;margin-top:3px}
+  .imgCredit a{color:#7a8a80;text-decoration:underline}
+  .imgFallback{font-size:11px;color:#c0392b;padding:14px;background:#fbeceb;border-radius:8px}
+  .mindmapBox{padding:6px 0}
+  /* interactive hierarchical mind map */
+  .mm-controls{display:flex;gap:8px;margin-bottom:12px}
+  .mm-ctrl{flex:1;font-size:12px;font-weight:700;padding:8px;border-radius:9px;border:1px solid var(--line);background:#f4f7f5;color:var(--green-d);cursor:pointer}
+  .mm-ctrl:active{background:#e7efe9}
+  .mindmap{font-size:13px}
+  .mm-en{display:block;font-weight:700;line-height:1.35}
+  .mm-vi{display:block;font-size:11.5px;font-weight:400;opacity:.8;line-height:1.3;margin-top:1px}
+  .mm-rootNode{
+    background:var(--green);color:#fff;border-radius:12px;padding:12px 16px;text-align:center;
+    margin-bottom:4px;box-shadow:0 2px 6px rgba(46,107,94,.25)
+  }
+  .mm-rootNode .mm-vi{opacity:.9;color:#dff0ea}
+  .mm-branches{position:relative;margin-left:8px;padding-left:18px;border-left:2px solid #cfe0d9}
+  .mm-branch{position:relative;margin-top:10px}
+  .mm-branch::before{
+    content:"";position:absolute;left:-18px;top:20px;width:16px;height:2px;background:#cfe0d9
+  }
+  .mm-b1{
+    display:flex;align-items:center;gap:8px;width:100%;text-align:left;cursor:pointer;
+    background:#eaf3ef;border:1px solid #cfe0d9;border-radius:10px;padding:9px 12px;color:var(--ink)
+  }
+  .mm-b1:active{background:#dfeee7}
+  .mm-caret{font-size:11px;color:var(--green);flex-shrink:0;width:12px}
+  .mm-btxt .mm-en{color:var(--green-d)}
+  .mm-children{
+    margin-left:10px;padding-left:16px;border-left:2px dashed #d8e4de;
+    margin-top:6px;overflow:hidden;transition:max-height .25s ease,opacity .2s ease;max-height:1200px;opacity:1
+  }
+  .mm-children.collapsed{max-height:0;opacity:0;margin-top:0;border-color:transparent}
+  .mm-leaf{
+    position:relative;background:#fafcfb;border:1px solid #e6ece9;border-radius:8px;
+    padding:7px 11px;margin-top:6px
+  }
+  .mm-leaf::before{
+    content:"";position:absolute;left:-16px;top:16px;width:14px;height:2px;background:#d8e4de
+  }
+  .mm-leaf .mm-en{font-size:12.5px;font-weight:600}
+  .imgGrid{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .imgItem{flex:1 1 90px;max-width:120px}
+  .imgItem svg{width:100%;height:auto;max-height:80px}
+  /* read-all panel */
+  .readAllCard{background:#f0f5f3;border:1px solid #d5e3dc;border-radius:12px;padding:12px;margin:4px 0}
+  .readModeRow .btn{background:var(--green)}
+  .readingNow{padding:2px}
+  @media(max-width:380px){ .qtext{font-size:15.5px} .btn{font-size:14.5px} }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>🇦🇺 Luyện thi Quốc tịch Úc</h1>
+    <p class="sub">200+ câu · dựa trên <em>Our Common Bond</em> · giải thích tiếng Việt</p>
+  </div>
+</header>
+
+<div class="wrap" id="app"></div>
+
+<div class="wrap">
+  <p class="foot">Nội dung dựa trên sách chính thức <b>Australian Citizenship: Our Common Bond</b> (testable section). Đây là công cụ ôn tập không chính thức. Đề thi thật lấy ngẫu nhiên và có thể khác. Ôn thêm tại citizenship.gov.au.</p>
+</div>
+
+<script id="qdata" type="application/json">[{"q": "Who are Australia's first inhabitants?", "options": ["British settlers", "Aboriginal and Torres Strait Islander peoples", "Chinese miners", "Dutch explorers"], "answer": 1, "cat": "people", "exp": "Người dân đầu tiên của Úc là người Thổ dân (Aboriginal) và người dân đảo Torres Strait — có nền văn hoá liên tục lâu đời nhất thế giới."}, {"q": "Aboriginal people are historically from:", "options": ["Only Tasmania", "Mainland Australia and Tasmania", "New Zealand", "The Torres Strait islands"], "answer": 1, "cat": "people", "exp": "Người Aboriginal đến từ đại lục Úc và Tasmania. Người Torres Strait Islander đến từ các đảo phía bắc Queensland."}, {"q": "Torres Strait Islander people are from islands between:", "options": ["Australia and New Zealand", "The northern tip of Queensland and Papua New Guinea", "Tasmania and Victoria", "Perth and Darwin"], "answer": 1, "cat": "people", "exp": "Người dân đảo Torres Strait đến từ các đảo nằm giữa mũi phía bắc Queensland và Papua New Guinea."}, {"q": "European settlement in Australia began in:", "options": ["1601", "1788", "1851", "1901"], "answer": 1, "cat": "people", "exp": "Định cư của người châu Âu bắt đầu năm 1788 khi Hạm đội Đầu tiên đến."}, {"q": "The First Fleet arrived on:", "options": ["25 April 1788", "26 January 1788", "1 January 1901", "26 January 1901"], "answer": 1, "cat": "people", "exp": "Hạm đội Đầu tiên (First Fleet) đến ngày 26 tháng 1 năm 1788 — nay là ngày Australia Day."}, {"q": "How many convict ships made up the First Fleet?", "options": ["5", "9", "11", "13"], "answer": 2, "cat": "people", "exp": "Hạm đội Đầu tiên gồm 11 chiếc tàu chở tù nhân từ Anh Quốc."}, {"q": "The First Fleet came from:", "options": ["Ireland only", "Great Britain", "France", "The Netherlands"], "answer": 1, "cat": "people", "exp": "Hạm đội Đầu tiên đến từ Anh Quốc (Great Britain)."}, {"q": "Who was the first Governor of New South Wales?", "options": ["Captain James Cook", "Captain Arthur Phillip", "King George III", "Governor Macquarie"], "answer": 1, "cat": "people", "exp": "Thống đốc đầu tiên của thuộc địa NSW là Đại uý Arthur Phillip."}, {"q": "Why did Britain transport convicts to Australia?", "options": ["To find gold", "British jails could not hold all the prisoners", "To fight a war", "To trade with Asia"], "answer": 1, "cat": "people", "exp": "Luật ở Anh rất khắc nghiệt và nhà tù không đủ chỗ, nên Anh đưa tù nhân sang thuộc địa mới New South Wales."}, {"q": "Early free settlers mainly came from:", "options": ["Great Britain and Ireland", "China and India", "Germany and Italy", "Greece and Turkey"], "answer": 0, "cat": "people", "exp": "Những người định cư tự do ban đầu chủ yếu đến từ Anh và Ireland, ảnh hưởng lớn đến văn hoá và chính trị Úc."}, {"q": "The gold rush began in:", "options": ["1788", "1851", "1901", "1967"], "answer": 1, "cat": "people", "exp": "Cơn sốt vàng (gold rush) bắt đầu năm 1851 tại NSW và Victoria."}, {"q": "During the gold rush, the first large non-European migrant group were:", "options": ["Indians", "Chinese people", "Africans", "Americans"], "answer": 1, "cat": "people", "exp": "Người Trung Quốc là nhóm di dân lớn đầu tiên không đến từ châu Âu, trong thời kỳ sốt vàng."}, {"q": "In the 10 years after the gold rush began, Australia's population:", "options": ["Fell by half", "Stayed the same", "More than doubled", "Tripled"], "answer": 2, "cat": "people", "exp": "Trong 10 năm, dân số Úc tăng hơn gấp đôi nhờ cơn sốt vàng."}, {"q": "In which year did the colonies unite into the Commonwealth of Australia?", "options": ["1788", "1851", "1901", "1945"], "answer": 2, "cat": "people", "exp": "Năm 1901, các thuộc địa hợp nhất thành Liên bang Úc (Commonwealth of Australia)."}, {"q": "The event of the colonies uniting in 1901 is called:", "options": ["The gold rush", "Federation", "Settlement", "The referendum"], "answer": 1, "cat": "people", "exp": "Sự kiện các thuộc địa hợp nhất năm 1901 gọi là Liên bang hoá (Federation)."}, {"q": "In 1901, Australia's population was about:", "options": ["Four million", "Ten million", "One million", "Twenty million"], "answer": 0, "cat": "people", "exp": "Năm 1901 dân số Úc khoảng 4 triệu người (chưa tính người Thổ dân và dân đảo Torres Strait)."}, {"q": "Aboriginal and Torres Strait Islander peoples were included in official population estimates after:", "options": ["Federation in 1901", "The 1967 Referendum", "World War II", "The gold rush"], "answer": 1, "cat": "people", "exp": "Sau cuộc trưng cầu dân ý năm 1967, người Thổ dân và dân đảo Torres Strait mới được tính vào dân số chính thức."}, {"q": "A large wave of non-British migration came after:", "options": ["The gold rush", "World War II", "Federation", "The First Fleet"], "answer": 1, "cat": "people", "exp": "Làn sóng di dân lớn không đến từ Anh xảy ra sau Thế chiến II."}, {"q": "Australia's national language is:", "options": ["English", "Latin", "No official language", "Aboriginal languages"], "answer": 0, "cat": "people", "exp": "Ngôn ngữ quốc gia của Úc là tiếng Anh — một phần của bản sắc dân tộc."}, {"q": "Roughly how many distinct Aboriginal and Torres Strait Islander languages are valued in Australia?", "options": ["More than 10", "More than 50", "More than 100", "More than 500"], "answer": 2, "cat": "people", "exp": "Úc trân trọng hơn 100 ngôn ngữ khác nhau của người Thổ dân và dân đảo Torres Strait."}, {"q": "How many states does Australia have?", "options": ["Five", "Six", "Seven", "Eight"], "answer": 1, "cat": "people", "exp": "Úc có sáu bang và hai lãnh thổ đại lục."}, {"q": "How many mainland territories does Australia have?", "options": ["One", "Two", "Three", "Four"], "answer": 1, "cat": "people", "exp": "Úc có hai lãnh thổ đại lục: ACT và Northern Territory."}, {"q": "Australia's capital city is:", "options": ["Sydney", "Melbourne", "Canberra", "Brisbane"], "answer": 2, "cat": "people", "exp": "Thủ đô của Úc là Canberra, nằm trong Lãnh thổ Thủ đô Úc (ACT)."}, {"q": "The capital of New South Wales is:", "options": ["Melbourne", "Sydney", "Brisbane", "Perth"], "answer": 1, "cat": "people", "exp": "Thủ phủ của New South Wales là Sydney — thành phố lớn nhất nước Úc."}, {"q": "The capital of Victoria is:", "options": ["Melbourne", "Sydney", "Adelaide", "Hobart"], "answer": 0, "cat": "people", "exp": "Thủ phủ của Victoria là Melbourne."}, {"q": "The capital of Queensland is:", "options": ["Cairns", "Brisbane", "Gold Coast", "Townsville"], "answer": 1, "cat": "people", "exp": "Thủ phủ của Queensland là Brisbane."}, {"q": "The capital of Western Australia is:", "options": ["Perth", "Fremantle", "Broome", "Darwin"], "answer": 0, "cat": "people", "exp": "Thủ phủ của Western Australia là Perth."}, {"q": "The capital of South Australia is:", "options": ["Adelaide", "Alice Springs", "Perth", "Hobart"], "answer": 0, "cat": "people", "exp": "Thủ phủ của South Australia là Adelaide."}, {"q": "The capital of Tasmania is:", "options": ["Launceston", "Hobart", "Devonport", "Burnie"], "answer": 1, "cat": "people", "exp": "Thủ phủ của Tasmania là Hobart."}, {"q": "The capital of the Northern Territory is:", "options": ["Alice Springs", "Darwin", "Katherine", "Uluru"], "answer": 1, "cat": "people", "exp": "Thủ phủ của Northern Territory là Darwin."}, {"q": "The capital of the Australian Capital Territory is:", "options": ["Sydney", "Canberra", "Queanbeyan", "Melbourne"], "answer": 1, "cat": "people", "exp": "Thủ phủ của ACT là Canberra — cũng là thủ đô quốc gia."}, {"q": "Which is Australia's largest state?", "options": ["Queensland", "New South Wales", "Western Australia", "Victoria"], "answer": 2, "cat": "people", "exp": "Western Australia là bang lớn nhất nước Úc."}, {"q": "Which is Australia's largest city?", "options": ["Melbourne", "Sydney", "Brisbane", "Perth"], "answer": 1, "cat": "people", "exp": "Sydney là thành phố lớn nhất nước Úc."}, {"q": "Which was the first colony established by the British?", "options": ["Victoria", "New South Wales", "Queensland", "Tasmania"], "answer": 1, "cat": "people", "exp": "New South Wales là thuộc địa đầu tiên do người Anh lập ra."}, {"q": "Which is the second largest state?", "options": ["Western Australia", "Queensland", "New South Wales", "Victoria"], "answer": 1, "cat": "people", "exp": "Queensland là bang lớn thứ hai; rạn san hô Great Barrier Reef chạy dọc bờ đông."}, {"q": "Which is the smallest mainland state?", "options": ["Tasmania", "Victoria", "South Australia", "Queensland"], "answer": 1, "cat": "people", "exp": "Victoria là bang nhỏ nhất trong các bang trên đại lục."}, {"q": "Which is Australia's smallest state overall?", "options": ["Victoria", "Tasmania", "South Australia", "ACT"], "answer": 1, "cat": "people", "exp": "Tasmania là bang nhỏ nhất, tách khỏi đại lục bởi eo biển Bass Strait."}, {"q": "Tasmania is separated from the mainland by:", "options": ["The Torres Strait", "The Bass Strait", "The Great Barrier Reef", "The Tasman Sea"], "answer": 1, "cat": "people", "exp": "Tasmania cách đại lục bởi eo biển Bass Strait."}, {"q": "The Great Barrier Reef runs along the coast of:", "options": ["Western Australia", "Queensland", "Victoria", "South Australia"], "answer": 1, "cat": "people", "exp": "Rạn san hô Great Barrier Reef nổi tiếng thế giới chạy dọc bờ đông Queensland."}, {"q": "Uluru and Kata Tjuta are located in:", "options": ["Western Australia", "South Australia", "The Northern Territory", "Queensland"], "answer": 2, "cat": "people", "exp": "Uluru, Kata Tjuta và Kings Canyon nằm ở Northern Territory."}, {"q": "The Barossa Valley wine region is in:", "options": ["Victoria", "South Australia", "New South Wales", "Tasmania"], "answer": 1, "cat": "people", "exp": "Vùng rượu vang Barossa Valley và dãy Flinders Ranges thuộc South Australia."}, {"q": "Margaret River and the Kimberley region are in:", "options": ["Queensland", "Western Australia", "Northern Territory", "Victoria"], "answer": 1, "cat": "people", "exp": "Margaret River, Ningaloo Coast và Kimberley thuộc Western Australia."}, {"q": "The gold rush of the 1850s created wealth that built fine buildings in:", "options": ["Queensland", "Victoria", "Western Australia", "Tasmania"], "answer": 1, "cat": "people", "exp": "Nhiều toà nhà đẹp ở Victoria được xây từ của cải của cơn sốt vàng thập niên 1850."}, {"q": "The Australian Capital Territory is located between:", "options": ["Brisbane and Sydney", "Sydney and Melbourne", "Melbourne and Adelaide", "Perth and Darwin"], "answer": 1, "cat": "people", "exp": "ACT nằm giữa Sydney và Melbourne, là nơi có thủ đô Canberra."}, {"q": "Australia Day is celebrated on:", "options": ["25 April", "26 January", "1 January", "25 December"], "answer": 1, "cat": "people", "exp": "Ngày Australia Day là 26 tháng 1, kỷ niệm ngày Hạm đội Đầu tiên đến năm 1788."}, {"q": "Anzac Day is commemorated on:", "options": ["26 January", "25 April", "11 November", "1 January"], "answer": 1, "cat": "people", "exp": "Ngày Anzac Day là 25 tháng 4 hằng năm."}, {"q": "Anzac Day commemorates the landing at Gallipoli in:", "options": ["1901", "1915", "1945", "1967"], "answer": 1, "cat": "people", "exp": "Anzac Day tưởng nhớ cuộc đổ bộ Gallipoli ở Thổ Nhĩ Kỳ ngày 25/4/1915, trong Thế chiến I."}, {"q": "ANZAC stands for the Australian and New Zealand:", "options": ["Air Corps", "Army Corps", "Allied Command", "Anzac Council"], "answer": 1, "cat": "people", "exp": "ANZAC là viết tắt của Australian and New Zealand Army Corps (Quân đoàn Úc và New Zealand)."}, {"q": "On Australia Day, the Prime Minister announces:", "options": ["The federal budget", "The Australian of the Year Awards", "New laws", "The election date"], "answer": 1, "cat": "people", "exp": "Trong dịp Australia Day, Thủ tướng công bố Giải thưởng Người Úc của Năm (Australian of the Year) tại Canberra."}, {"q": "A Welcome to Country is performed by:", "options": ["The Prime Minister", "An Aboriginal or Torres Strait Islander custodian of the local region", "Any government official", "The Governor-General"], "answer": 1, "cat": "people", "exp": "Nghi thức Welcome to Country do người trông coi truyền thống (custodian) người Thổ dân/dân đảo Torres Strait của vùng đó thực hiện."}, {"q": "A Welcome to Country usually happens:", "options": ["At the end of an event", "As the first item to open an event", "Only at citizenship ceremonies", "Once a year"], "answer": 1, "cat": "people", "exp": "Welcome to Country thường là phần mở đầu đầu tiên của một sự kiện."}, {"q": "An Acknowledgement of Country can be delivered by:", "options": ["Only an Elder", "Only the Prime Minister", "Anyone (usually the Chair or MC)", "Only Aboriginal people"], "answer": 2, "cat": "people", "exp": "Bất kỳ ai cũng có thể đọc Acknowledgement of Country, thường là người chủ toạ hoặc MC."}, {"q": "Both Welcome to and Acknowledgement of Country are performed to:", "options": ["Start a sports match", "Show respect for Aboriginal and Torres Strait Islander peoples", "Elect a leader", "Celebrate Australia Day only"], "answer": 1, "cat": "people", "exp": "Cả hai nghi thức đều nhằm thể hiện sự tôn trọng với người Thổ dân và dân đảo Torres Strait."}, {"q": "The Australian National Flag colours are:", "options": ["Green and gold", "Black, red and yellow", "Blue, white and red", "Green, blue and white"], "answer": 2, "cat": "people", "exp": "Cờ Quốc gia Úc có ba màu: xanh dương, trắng và đỏ."}, {"q": "The Union Jack on the flag represents:", "options": ["The Southern Cross", "Australia's history of British settlement", "The six states", "Peace"], "answer": 1, "cat": "people", "exp": "Cờ Union Jack (góc trên bên trái) tượng trưng cho lịch sử định cư của người Anh và luật pháp, thể chế Úc thừa hưởng."}, {"q": "The Commonwealth Star on the flag has:", "options": ["Five points", "Six points", "Seven points", "Eight points"], "answer": 2, "cat": "people", "exp": "Ngôi sao Liên bang có bảy cánh: 6 cho các bang và 1 cho các lãnh thổ."}, {"q": "The Southern Cross on the flag is:", "options": ["A group of stars seen in the southern sky", "The Union Jack", "A symbol of Britain", "The national flower"], "answer": 0, "cat": "people", "exp": "Chòm sao Nam Thập Tự (Southern Cross) là nhóm sao thấy được trên bầu trời phía nam."}, {"q": "The Australian Aboriginal Flag colours are:", "options": ["Blue, white and red", "Black, red and yellow", "Green and gold", "Green, blue and black"], "answer": 1, "cat": "people", "exp": "Cờ Thổ dân Úc có màu đen, đỏ và vàng."}, {"q": "On the Aboriginal Flag, the black represents:", "options": ["The earth", "The sun", "The Aboriginal peoples", "The sea"], "answer": 2, "cat": "people", "exp": "Nửa trên màu đen tượng trưng cho người Thổ dân Úc."}, {"q": "On the Aboriginal Flag, the red represents:", "options": ["The sun", "The earth", "The people", "The sky"], "answer": 1, "cat": "people", "exp": "Nửa dưới màu đỏ tượng trưng cho đất, có ý nghĩa nghi lễ."}, {"q": "On the Aboriginal Flag, the yellow circle represents:", "options": ["The moon", "The earth", "The sun", "A star"], "answer": 2, "cat": "people", "exp": "Vòng tròn vàng tượng trưng cho mặt trời."}, {"q": "The Torres Strait Islander Flag colours are:", "options": ["Black, red and yellow", "Green, blue, black and white", "Blue, white and red", "Green and gold"], "answer": 1, "cat": "people", "exp": "Cờ dân đảo Torres Strait có màu xanh lá, xanh dương, đen và trắng."}, {"q": "On the Torres Strait Islander Flag, the green stripes represent:", "options": ["The sea", "The land", "Peace", "The people"], "answer": 1, "cat": "people", "exp": "Các dải màu xanh lá tượng trưng cho đất."}, {"q": "On the Torres Strait Islander Flag, the blue panel represents:", "options": ["The sky", "The sea", "The land", "The people"], "answer": 1, "cat": "people", "exp": "Ô màu xanh dương ở giữa tượng trưng cho biển."}, {"q": "On the Torres Strait Islander Flag, the white dancer's headdress (dhari) is a symbol for:", "options": ["Peace only", "All Torres Strait Islanders", "The government", "The sun"], "answer": 1, "cat": "people", "exp": "Mũ đội đầu của vũ công (dhari) màu trắng là biểu tượng cho tất cả người dân đảo Torres Strait."}, {"q": "The white star on the Torres Strait Islander Flag symbolises peace and represents:", "options": ["The five major island groups", "Six states", "The Southern Cross", "The sun"], "answer": 0, "cat": "people", "exp": "Ngôi sao trắng tượng trưng cho hoà bình; các cánh sao đại diện cho các nhóm đảo ở Torres Strait."}, {"q": "The Commonwealth Coat of Arms represents:", "options": ["The state of NSW", "National unity and the authority of the Commonwealth", "Only the monarchy", "The gold rush"], "answer": 1, "cat": "people", "exp": "Quốc huy Liên bang (Coat of Arms) là biểu tượng chính thức, tượng trưng cho sự thống nhất quốc gia."}, {"q": "The shield in the centre of the Coat of Arms represents:", "options": ["The Prime Minister", "The six states and federation", "The Union Jack", "The armed forces"], "answer": 1, "cat": "people", "exp": "Tấm khiên ở giữa quốc huy tượng trưng cho sáu bang và liên bang."}, {"q": "Which two animals support the shield on the Coat of Arms?", "options": ["A lion and a unicorn", "A kangaroo and an emu", "An eagle and a dingo", "A koala and a kookaburra"], "answer": 1, "cat": "people", "exp": "Kangaroo và emu (hai loài vật bản địa) đỡ hai bên tấm khiên trên quốc huy."}, {"q": "Australia's national flower is the:", "options": ["Waratah", "Golden wattle", "Kangaroo paw", "Bottlebrush"], "answer": 1, "cat": "people", "exp": "Quốc hoa của Úc là cây keo hoa vàng (golden wattle)."}, {"q": "Australia's national colours are:", "options": ["Blue and white", "Green and gold", "Red and black", "Yellow and blue"], "answer": 1, "cat": "people", "exp": "Màu quốc gia của Úc là xanh lá và vàng — màu của cây keo hoa vàng."}, {"q": "Australia's national gemstone is the:", "options": ["Diamond", "Opal", "Sapphire", "Pearl"], "answer": 1, "cat": "people", "exp": "Đá quý quốc gia của Úc là ngọc mắt mèo opal."}, {"q": "Australia's national anthem is:", "options": ["God Save the King", "Waltzing Matilda", "Advance Australia Fair", "I Still Call Australia Home"], "answer": 2, "cat": "people", "exp": "Quốc ca của Úc là 'Advance Australia Fair'."}, {"q": "'Advance Australia Fair' is sung at:", "options": ["Only football games", "Occasions of national importance, including citizenship ceremonies", "Only Australia Day", "Private parties"], "answer": 1, "cat": "people", "exp": "Quốc ca được hát trong các dịp quan trọng quốc gia, gồm cả lễ nhập tịch và sự kiện thể thao lớn."}, {"q": "Australia's system of government is a:", "options": ["Dictatorship", "Parliamentary democracy", "Absolute monarchy", "One-party state"], "answer": 1, "cat": "rights", "exp": "Hệ thống chính quyền của Úc là nền dân chủ nghị viện (parliamentary democracy)."}, {"q": "In a parliamentary democracy, the power of government comes from:", "options": ["The King", "The Australian people", "The courts", "The army"], "answer": 1, "cat": "rights", "exp": "Quyền lực của chính phủ đến từ người dân Úc, vì công dân bầu người đại diện cho mình trong quốc hội."}, {"q": "The Rule of Law means:", "options": ["The King is above the law", "No person or group is above the law", "Only citizens obey the law", "Religious rules override laws"], "answer": 1, "cat": "rights", "exp": "Pháp quyền: không cá nhân, nhóm hay quy tắc tôn giáo nào đứng trên luật pháp."}, {"q": "Australians believe change should occur through:", "options": ["Violence", "Discussion, peaceful persuasion and the democratic process", "Military force", "Bribery"], "answer": 1, "cat": "rights", "exp": "Người Úc tin rằng thay đổi phải qua thảo luận, thuyết phục ôn hoà và tiến trình dân chủ — bác bỏ bạo lực."}, {"q": "Australia's democratic system treats every individual, regardless of background, with:", "options": ["Suspicion", "Dignity and respect", "Preference by wealth", "Preference by religion"], "answer": 1, "cat": "rights", "exp": "Hệ thống dân chủ dựa trên nguyên tắc mọi cá nhân, bất kể xuất thân, đều có quyền và bình đẳng trước pháp luật."}, {"q": "Freedom of speech means people can:", "options": ["Break any law", "Say and write what they think, within the law", "Never criticise government", "Only speak English"], "answer": 1, "cat": "rights", "exp": "Tự do ngôn luận: được nói và viết điều mình nghĩ, kể cả phê phán chính phủ, miễn là tuân thủ luật pháp."}, {"q": "Freedom of expression includes expressing views through:", "options": ["Only speech", "Art, film, music and literature", "Only newspapers", "Only protest"], "answer": 1, "cat": "rights", "exp": "Tự do biểu đạt gồm cả nghệ thuật, phim, âm nhạc và văn học."}, {"q": "Freedom of association is the right to:", "options": ["Own a business", "Form and join associations to pursue common goals", "Vote twice", "Avoid taxes"], "answer": 1, "cat": "rights", "exp": "Tự do hội họp/lập hội: quyền thành lập và tham gia các tổ chức để theo đuổi mục tiêu chung."}, {"q": "Under freedom of association, people:", "options": ["Must join a political party", "Cannot be forced to join or leave a group", "Must join a union", "Cannot join any group"], "answer": 1, "cat": "rights", "exp": "Người dân được tự do tham gia hoặc không tham gia, và không thể bị ép buộc gia nhập một tổ chức."}, {"q": "The Australian government is secular, which means it:", "options": ["Has an official religion", "Operates separately from churches or religious entities", "Bans religion", "Requires church attendance"], "answer": 1, "cat": "rights", "exp": "Chính phủ Úc mang tính thế tục (secular): hoạt động tách biệt với nhà thờ và các tổ chức tôn giáo."}, {"q": "Australia's official national religion is:", "options": ["Christianity", "Islam", "There is no official national religion", "Buddhism"], "answer": 2, "cat": "rights", "exp": "Úc không có tôn giáo quốc gia chính thức; mọi người tự do theo hoặc không theo tôn giáo nào."}, {"q": "When an Australian law conflicts with a religious practice:", "options": ["The religious practice wins", "Australian law prevails", "People may choose", "It is ignored"], "answer": 1, "cat": "rights", "exp": "Khi luật Úc mâu thuẫn với tập tục tôn giáo, LUẬT ÚC luôn thắng."}, {"q": "Men and women in Australia:", "options": ["Have different legal rights", "Have equal rights", "Only men can vote", "Only men can work"], "answer": 1, "cat": "rights", "exp": "Nam và nữ có quyền bình đẳng ở Úc; phân biệt đối xử theo giới tính là phạm pháp."}, {"q": "Equality of opportunity is often called:", "options": ["Mateship", "A 'fair go'", "The Rule of Law", "Federation"], "answer": 1, "cat": "rights", "exp": "Bình đẳng về cơ hội thường được gọi là 'a fair go'."}, {"q": "A 'fair go' means what you achieve should come from:", "options": ["Your wealth", "Your family name", "Your talents, work and effort", "Your religion"], "answer": 2, "cat": "rights", "exp": "'Fair go' nghĩa là thành công đến từ tài năng, công sức và nỗ lực, không phải từ giàu nghèo hay xuất thân."}, {"q": "Which is a RESPONSIBILITY of an Australian citizen?", "options": ["Apply for a passport", "Obey the laws of Australia", "Ask for consular help", "Seek election"], "answer": 1, "cat": "rights", "exp": "Trách nhiệm gồm: tuân thủ luật, đi bầu, bảo vệ nước Úc khi cần, và làm bồi thẩm khi được gọi."}, {"q": "Voting in federal and state/territory elections is a responsibility for citizens aged:", "options": ["16 or over", "18 years or over", "21 or over", "25 or over"], "answer": 1, "cat": "rights", "exp": "Bầu cử liên bang và tiểu bang/lãnh thổ là trách nhiệm của công dân từ 18 tuổi trở lên."}, {"q": "A referendum is a vote to:", "options": ["Elect a Prime Minister", "Change the Australian Constitution", "Choose a state premier", "Pass a normal law"], "answer": 1, "cat": "rights", "exp": "Trưng cầu dân ý (referendum) là cuộc bỏ phiếu để thay đổi Hiến pháp Úc."}, {"q": "Serving on a jury is a responsibility for citizens aged:", "options": ["16 or over", "18 years or over", "21 or over", "30 or over"], "answer": 1, "cat": "rights", "exp": "Làm bồi thẩm đoàn là trách nhiệm của công dân từ 18 tuổi trở lên, nếu được gọi."}, {"q": "A jury is a group of ordinary people who:", "options": ["Make laws", "Decide if a person is guilty or not guilty", "Arrest criminals", "Run elections"], "answer": 1, "cat": "rights", "exp": "Bồi thẩm đoàn là nhóm người dân bình thường nghe bằng chứng và quyết định một người có tội hay vô tội."}, {"q": "Service in the Australian Defence Force is:", "options": ["Compulsory for all", "Voluntary", "Only for men", "Banned for citizens"], "answer": 1, "cat": "rights", "exp": "Phục vụ trong Quân đội Úc là tự nguyện, nhưng bảo vệ nước Úc khi cần là trách nhiệm của công dân."}, {"q": "Which is a PRIVILEGE of Australian citizenship?", "options": ["Obeying the law", "Applying for an Australian passport", "Serving on a jury", "Paying tax"], "answer": 1, "cat": "rights", "exp": "Đặc quyền gồm: xin hộ chiếu Úc, ứng cử vào quốc hội, xin việc trong công vụ/quân đội, nhờ trợ giúp lãnh sự."}, {"q": "To seek election to parliament, an Australian citizen must:", "options": ["Be over 30", "Not be a dual citizen", "Own property", "Be born in Australia"], "answer": 1, "cat": "rights", "exp": "Để ứng cử vào quốc hội, công dân phải từ 18 tuổi trở lên VÀ không được là công dân hai quốc tịch (dual citizen)."}, {"q": "Australian citizens can apply for children born overseas to become citizens by:", "options": ["Marriage", "Descent", "Purchase", "Lottery"], "answer": 1, "cat": "rights", "exp": "Công dân Úc có thể xin cho con sinh ở nước ngoài trở thành công dân theo huyết thống (by descent)."}, {"q": "While overseas, Australian citizens can ask for help from:", "options": ["Any government", "An Australian embassy, high commission or consulate", "The United Nations only", "No one"], "answer": 1, "cat": "rights", "exp": "Ở nước ngoài, công dân có thể nhờ trợ giúp lãnh sự từ đại sứ quán, cao uỷ hoặc lãnh sự quán Úc."}, {"q": "Paying tax in Australia is:", "options": ["Optional", "Required by law", "Only for the wealthy", "Only for businesses"], "answer": 1, "cat": "rights", "exp": "Đóng thuế là bắt buộc theo luật; tiền thuế do ATO thu và dùng cho y tế, giáo dục, quốc phòng, đường xá..."}, {"q": "Tax in Australia is collected by the:", "options": ["Reserve Bank", "Australian Taxation Office (ATO)", "Australian Federal Police", "AEC"], "answer": 1, "cat": "rights", "exp": "Sở Thuế Úc (ATO) thu thuế để tài trợ các dịch vụ công."}, {"q": "Which is an example of active citizenship?", "options": ["Avoiding elections", "Volunteering and community work", "Breaking the law", "Refusing to pay tax"], "answer": 1, "cat": "rights", "exp": "Công dân tích cực: tham gia cộng đồng, tình nguyện, tham gia đời sống chính trị."}, {"q": "At all times, even while exercising freedoms, people must:", "options": ["Ask permission first", "Obey the laws of Australia", "Join a party", "Register with police"], "answer": 1, "cat": "rights", "exp": "Mọi lúc, kể cả khi thực hiện các quyền tự do, người dân phải tuân thủ luật pháp Úc."}, {"q": "Australians can peacefully protest, but gatherings must:", "options": ["Be violent", "Be peaceful and not injure anyone or damage property", "Be secret", "Be approved by the King"], "answer": 1, "cat": "rights", "exp": "Được biểu tình ôn hoà, nhưng phải hợp pháp: không gây thương tích cho ai hoặc phá hoại tài sản."}, {"q": "It is against the law to discriminate against a person because of their:", "options": ["Skills", "Gender", "Qualifications", "Effort"], "answer": 1, "cat": "rights", "exp": "Phân biệt đối xử vì giới tính là phạm pháp; nam nữ có quyền bình đẳng."}, {"q": "Australia has public holidays on Christian days such as:", "options": ["Diwali", "Good Friday, Easter Sunday and Christmas Day", "Ramadan", "Chinese New Year"], "answer": 1, "cat": "rights", "exp": "Úc có ngày nghỉ lễ vào các ngày Cơ đốc như Good Friday, Easter Sunday và Christmas, nhưng vẫn tôn trọng mọi tôn giáo."}, {"q": "People in Australia are free to follow any religion, or:", "options": ["Must follow Christianity", "Not follow a religion at all", "Follow only major religions", "Register their religion"], "answer": 1, "cat": "rights", "exp": "Mọi người tự do theo bất kỳ tôn giáo nào, hoặc chọn không theo tôn giáo nào cả."}, {"q": "Freedom of speech underpins:", "options": ["The gold rush", "Our democratic system", "The monarchy", "The tax system"], "answer": 1, "cat": "rights", "exp": "Tự do ngôn luận là nền tảng của hệ thống dân chủ Úc."}, {"q": "Voting may NOT be compulsory in some states for:", "options": ["Federal elections", "Local government elections", "Referendums", "State elections"], "answer": 1, "cat": "rights", "exp": "Bầu cử liên bang/tiểu bang là bắt buộc, nhưng bầu cử chính quyền địa phương có thể không bắt buộc ở một số bang."}, {"q": "By voting, Australian citizens:", "options": ["Break the law", "Have a say in how Australia is governed", "Avoid taxes", "Join the government"], "answer": 1, "cat": "rights", "exp": "Qua việc bỏ phiếu, công dân có tiếng nói về cách đất nước được điều hành."}, {"q": "Which of these is protected under Australian anti-discrimination laws?", "options": ["Only wealth", "Gender, race, disability and age", "Only religion", "Only citizens"], "answer": 1, "cat": "rights", "exp": "Nhiều luật ở Úc bảo đảm không ai bị đối xử khác biệt vì giới tính, chủng tộc, khuyết tật hay tuổi tác."}, {"q": "People are free to join legal organisations such as a:", "options": ["Criminal gang", "Political party, trade union or cultural group", "Terrorist group", "Illegal drug ring"], "answer": 1, "cat": "rights", "exp": "Được tự do tham gia tổ chức hợp pháp như đảng chính trị, công đoàn, nhóm tôn giáo/văn hoá/xã hội."}, {"q": "When engaging in religious practices, people must still:", "options": ["Register with police", "Obey the laws of Australia", "Pay extra tax", "Ask the King"], "answer": 1, "cat": "rights", "exp": "Ngay cả khi thực hành tôn giáo, luật Úc vẫn phải được tuân thủ; khi mâu thuẫn, luật Úc thắng."}, {"q": "Australian citizens can raise concerns about government policy by:", "options": ["Only voting", "Contacting their elected representative", "Breaking the law", "Leaving the country"], "answer": 1, "cat": "rights", "exp": "Công dân có thể liên hệ đại biểu dân cử của mình để nêu quan ngại về chính sách."}, {"q": "Which best describes the responsibility to defend Australia?", "options": ["Compulsory military service for all", "A responsibility to defend the nation should the need arise", "Only for soldiers", "Not a responsibility"], "answer": 1, "cat": "rights", "exp": "Phục vụ quân đội là tự nguyện, nhưng bảo vệ đất nước khi cần là trách nhiệm của mọi công dân."}, {"q": "Applying for a job in the Australian Public Service is a:", "options": ["Responsibility", "Privilege of citizenship", "Requirement", "Punishment"], "answer": 1, "cat": "rights", "exp": "Xin việc trong Công vụ Úc (APS) là một đặc quyền của công dân."}, {"q": "Which service can Australian citizens seek while overseas?", "options": ["Free flights", "Consular assistance", "Free housing", "Tax refunds"], "answer": 1, "cat": "rights", "exp": "Công dân có thể xin trợ giúp lãnh sự khi ở nước ngoài, ví dụ trong trường hợp khẩn cấp."}, {"q": "Taxes are spent on services including:", "options": ["Only politicians' salaries", "Healthcare, education, defence, roads and social security", "Only defence", "Private companies"], "answer": 1, "cat": "rights", "exp": "Tiền thuế chi cho y tế, giáo dục, quốc phòng, đường xá, an sinh xã hội và nhiều dịch vụ khác."}, {"q": "Voting in Australian federal elections is:", "options": ["Optional", "Compulsory", "Only for men", "Only for property owners"], "answer": 1, "cat": "government", "exp": "Bầu cử liên bang ở Úc là bắt buộc đối với công dân từ 18 tuổi trở lên."}, {"q": "In Australia, voting is done by:", "options": ["Show of hands", "Secret ballot", "Phone call", "Public declaration"], "answer": 1, "cat": "government", "exp": "Bỏ phiếu ở Úc là phiếu kín (secret ballot) — không ai biết bạn bầu cho ai trừ khi bạn tự nói."}, {"q": "The body that runs federal elections is the:", "options": ["High Court", "Australian Electoral Commission (AEC)", "Parliament", "Cabinet"], "answer": 1, "cat": "government", "exp": "Uỷ ban Bầu cử Úc (AEC) tổ chức bầu cử liên bang, độc lập với chính phủ."}, {"q": "The AEC is:", "options": ["Controlled by the Prime Minister", "Independent of the government", "Part of the courts", "A political party"], "answer": 1, "cat": "government", "exp": "AEC độc lập; đảng phái hay người trong chính phủ không thể tác động đến quyết định của AEC."}, {"q": "If you do not vote without a good reason, you may:", "options": ["Go to jail", "Have to pay a fine", "Lose citizenship", "Be deported"], "answer": 1, "cat": "government", "exp": "Nếu không đi bầu mà không có lý do chính đáng, bạn có thể phải nộp phạt."}, {"q": "Before 1901, Australia was made up of:", "options": ["One nation", "Six separate self-governing British colonies", "Two territories", "Ten states"], "answer": 1, "cat": "government", "exp": "Trước năm 1901, Úc gồm sáu thuộc địa tự trị riêng biệt của Anh."}, {"q": "The Australian Constitution came into effect on:", "options": ["26 January 1788", "1 January 1901", "25 April 1915", "1 January 1967"], "answer": 1, "cat": "government", "exp": "Hiến pháp Úc có hiệu lực ngày 1 tháng 1 năm 1901, khi các thuộc địa trở thành một quốc gia."}, {"q": "The Australian Constitution is:", "options": ["A political party", "The legal document setting out the basic rules for governing Australia", "A type of election", "A court"], "answer": 1, "cat": "government", "exp": "Hiến pháp Úc là văn bản pháp lý đặt ra các quy tắc cơ bản để điều hành đất nước."}, {"q": "The Australian Constitution established a parliament consisting of:", "options": ["One house", "A House of Representatives and a Senate", "Three houses", "The Cabinet only"], "answer": 1, "cat": "government", "exp": "Hiến pháp lập ra Quốc hội gồm Hạ viện (House of Representatives) và Thượng viện (Senate)."}, {"q": "The court with the ultimate power to interpret the Constitution is the:", "options": ["Local court", "High Court of Australia", "Supreme Court of NSW", "Federal Police"], "answer": 1, "cat": "government", "exp": "Toà Thượng thẩm Úc (High Court of Australia) có quyền tối cao giải thích và áp dụng luật."}, {"q": "To change the Constitution, a referendum needs a:", "options": ["Simple majority", "Double majority", "Royal decree", "Court order"], "answer": 1, "cat": "government", "exp": "Sửa Hiến pháp cần 'đa số kép': đa số cử tri toàn quốc VÀ đa số cử tri ở đa số các bang."}, {"q": "In the 1967 Referendum, over 90% of Australians voted 'Yes' to:", "options": ["Change the flag", "Allow Aboriginal peoples to be counted in the Census", "Leave Britain", "Move the capital"], "answer": 1, "cat": "government", "exp": "Trong trưng cầu 1967, hơn 90% người Úc bỏ phiếu 'Đồng ý' để người Thổ dân được tính trong Điều tra dân số."}, {"q": "The three powers under the Constitution are legislative, executive and:", "options": ["Military", "Judicial", "Religious", "Local"], "answer": 1, "cat": "government", "exp": "Ba quyền: lập pháp (làm luật), hành pháp (thi hành luật), tư pháp (giải thích và áp dụng luật)."}, {"q": "Legislative power is the power to:", "options": ["Interpret laws", "Make laws", "Enforce laws", "Sign treaties"], "answer": 1, "cat": "government", "exp": "Quyền lập pháp là quyền làm luật, thuộc về Quốc hội."}, {"q": "Legislative power belongs to:", "options": ["The courts", "Parliament", "The police", "The Governor-General alone"], "answer": 1, "cat": "government", "exp": "Quyền lập pháp thuộc về Quốc hội, gồm các đại biểu do dân bầu."}, {"q": "Executive power is the power to:", "options": ["Make laws", "Put laws into practice", "Interpret laws", "Elect the King"], "answer": 1, "cat": "government", "exp": "Quyền hành pháp là quyền đưa luật vào thực thi."}, {"q": "The Executive includes the Prime Minister, ministers and the:", "options": ["High Court", "Governor-General", "Senate only", "AEC"], "answer": 1, "cat": "government", "exp": "Nhánh hành pháp gồm Thủ tướng, các bộ trưởng và Toàn quyền."}, {"q": "Judicial power is the power to:", "options": ["Make laws", "Interpret and apply the law", "Run elections", "Collect taxes"], "answer": 1, "cat": "government", "exp": "Quyền tư pháp là quyền giải thích và áp dụng luật; toà án và thẩm phán độc lập với quốc hội và chính phủ."}, {"q": "Courts and judges in Australia are:", "options": ["Controlled by the Prime Minister", "Independent of parliament and government", "Elected by the people", "Part of the police"], "answer": 1, "cat": "government", "exp": "Toà án và thẩm phán độc lập với quốc hội và chính phủ."}, {"q": "Australia's Head of State is:", "options": ["The Prime Minister", "The Governor-General", "King Charles III", "The Chief Justice"], "answer": 2, "cat": "government", "exp": "Nguyên thủ quốc gia của Úc là Vua Charles III (King Charles III)."}, {"q": "The King's representative in Australia is the:", "options": ["Prime Minister", "Governor-General", "Chief Minister", "Premier"], "answer": 1, "cat": "government", "exp": "Toàn quyền (Governor-General) là đại diện của Nhà Vua tại Úc, do Vua bổ nhiệm theo đề nghị của Thủ tướng."}, {"q": "Australia is a:", "options": ["Republic", "Constitutional monarchy", "Dictatorship", "Theocracy"], "answer": 1, "cat": "government", "exp": "Úc là quân chủ lập hiến (constitutional monarchy): Vua là nguyên thủ nhưng phải hành động theo Hiến pháp."}, {"q": "The leader of the Australian Government is the:", "options": ["King", "Governor-General", "Prime Minister", "Chief Justice"], "answer": 2, "cat": "government", "exp": "Người lãnh đạo Chính phủ Úc là Thủ tướng (Prime Minister)."}, {"q": "The Governor-General signs bills into law. This is called:", "options": ["Federation", "Royal Assent", "A referendum", "A veto"], "answer": 1, "cat": "government", "exp": "Toàn quyền ký các dự luật thành luật — gọi là Royal Assent (Ngự chuẩn)."}, {"q": "The leader of a state government is called the:", "options": ["Chief Minister", "Premier", "Governor", "Mayor"], "answer": 1, "cat": "government", "exp": "Lãnh đạo chính quyền bang gọi là Premier (Thủ hiến bang)."}, {"q": "The leader of a territory government is called the:", "options": ["Premier", "Chief Minister", "Governor", "Prime Minister"], "answer": 1, "cat": "government", "exp": "Lãnh đạo chính quyền lãnh thổ gọi là Chief Minister (Thủ hiến lãnh thổ)."}, {"q": "The leader of a local government is called the:", "options": ["Premier", "Mayor or Shire President", "Governor", "Senator"], "answer": 1, "cat": "government", "exp": "Lãnh đạo chính quyền địa phương gọi là Mayor hoặc Shire President."}, {"q": "An elected member of a local council is called a:", "options": ["Senator", "Councillor", "Minister", "Premier"], "answer": 1, "cat": "government", "exp": "Thành viên do dân bầu của hội đồng địa phương gọi là Councillor (nghị viên)."}, {"q": "The two houses of the Australian Parliament are the House of Representatives and the:", "options": ["Cabinet", "Senate", "High Court", "Council"], "answer": 1, "cat": "government", "exp": "Hai viện của Quốc hội Úc là Hạ viện và Thượng viện (Senate)."}, {"q": "The House of Representatives is also called the:", "options": ["Upper House", "Lower House or People's House", "States' House", "House of Review"], "answer": 1, "cat": "government", "exp": "Hạ viện còn được gọi là Lower House hoặc People's House (Viện của Dân)."}, {"q": "How many members are in the House of Representatives?", "options": ["Exactly 76", "Over 150", "Exactly 50", "Over 300"], "answer": 1, "cat": "government", "exp": "Hạ viện có hơn 150 thành viên, tuỳ theo dân số mỗi bang và lãnh thổ."}, {"q": "The Senate is also called the Upper House or the:", "options": ["People's House", "States' House / House of Review", "Lower House", "Local House"], "answer": 1, "cat": "government", "exp": "Thượng viện còn gọi là States' House hoặc House of Review (Viện Xem xét lại)."}, {"q": "How many senators are there in total?", "options": ["76", "150", "100", "50"], "answer": 0, "cat": "government", "exp": "Có tổng cộng 76 thượng nghị sĩ (senators)."}, {"q": "How many senators does each state elect?", "options": ["2", "6", "12", "20"], "answer": 2, "cat": "government", "exp": "Mỗi bang bầu 12 thượng nghị sĩ; mỗi lãnh thổ (ACT và NT) bầu 2."}, {"q": "In the Senate, all states are represented:", "options": ["By population", "Equally regardless of size", "By wealth", "By area"], "answer": 1, "cat": "government", "exp": "Tất cả các bang có số thượng nghị sĩ bằng nhau ở Thượng viện, bất kể diện tích hay dân số."}, {"q": "Which level of government is responsible for defence and immigration?", "options": ["Local", "State", "Federal (Australian) Government", "None"], "answer": 2, "cat": "government", "exp": "Chính phủ Liên bang lo quốc phòng, nhập cư, thuế, ngoại giao và các vấn đề quốc gia."}, {"q": "Which level of government is primarily responsible for hospitals and schools?", "options": ["Federal", "State and territory governments", "Local councils", "The King"], "answer": 1, "cat": "government", "exp": "Chính quyền tiểu bang/lãnh thổ chủ yếu lo bệnh viện, trường học, đường xá, cảnh sát."}, {"q": "Which level of government is responsible for rubbish collection and local roads?", "options": ["Federal", "State", "Local government", "The Senate"], "answer": 2, "cat": "government", "exp": "Chính quyền địa phương (hội đồng) lo thu rác, đường địa phương, công viên, giấy phép xây dựng."}, {"q": "A political party is a group of people who:", "options": ["Run the courts", "Share similar ideas about how the country should be governed", "Collect taxes", "Enforce laws"], "answer": 1, "cat": "government", "exp": "Đảng chính trị là nhóm người có ý tưởng giống nhau về cách điều hành đất nước."}, {"q": "A parliamentarian who does not belong to any political party is called:", "options": ["A minister", "An independent", "A senator", "A councillor"], "answer": 1, "cat": "government", "exp": "Nghị sĩ không thuộc đảng nào gọi là 'independent' (độc lập)."}, {"q": "After a federal election, the government is formed by the party or coalition with:", "options": ["The most senators", "A majority in the House of Representatives", "The most money", "Royal approval"], "answer": 1, "cat": "government", "exp": "Sau bầu cử, đảng (hoặc liên minh) chiếm đa số ở Hạ viện lập chính phủ; lãnh đạo đảng đó thành Thủ tướng."}, {"q": "The party with the second largest number of members forms the:", "options": ["Cabinet", "Opposition", "Senate", "High Court"], "answer": 1, "cat": "government", "exp": "Đảng có số ghế lớn thứ hai ở Hạ viện lập phe Đối lập (Opposition)."}, {"q": "Ministers with the most important portfolios make up the:", "options": ["Senate", "Cabinet", "Opposition", "High Court"], "answer": 1, "cat": "government", "exp": "Các bộ trưởng giữ những trọng trách quan trọng nhất tạo thành Nội các (Cabinet) — cơ quan ra quyết định then chốt."}, {"q": "A proposal for a new law is called a:", "options": ["An Act", "A Bill", "A referendum", "A portfolio"], "answer": 1, "cat": "government", "exp": "Đề xuất một luật mới gọi là 'Bill' (dự luật); sau khi được thông qua và ký, nó thành luật."}, {"q": "In Australia's court system, a person is considered:", "options": ["Guilty until proven innocent", "Innocent until proven guilty", "Always guilty", "Judged by the police"], "answer": 1, "cat": "government", "exp": "Trong hệ thống toà án Úc, người ta được coi là vô tội cho đến khi bị chứng minh có tội."}, {"q": "The national police force that investigates crimes against federal laws is the:", "options": ["State Police", "Australian Federal Police (AFP)", "Army", "AEC"], "answer": 1, "cat": "government", "exp": "Cảnh sát Liên bang Úc (AFP) điều tra tội phạm vi phạm luật liên bang như buôn ma tuý, an ninh quốc gia."}, {"q": "In Australia, offering a bribe to a police officer is:", "options": ["Allowed", "A serious crime", "Encouraged", "A minor issue"], "answer": 1, "cat": "government", "exp": "Hối lộ cảnh sát là tội nghiêm trọng ở Úc; kể cả đề nghị đưa hối lộ cũng phạm pháp."}, {"q": "Judges and magistrates are appointed by the government, but the government:", "options": ["Can fire them for their decisions", "Cannot take their jobs away if it disagrees with them", "Elects them", "Pays them nothing"], "answer": 1, "cat": "government", "exp": "Thẩm phán do chính phủ bổ nhiệm, nhưng chính phủ không thể sa thải họ vì bất đồng với phán quyết — bảo đảm độc lập tư pháp."}, {"q": "Not knowing that you broke a law:", "options": ["Is a valid excuse", "Is no excuse — you could still be charged", "Means no penalty", "Only applies to citizens"], "answer": 1, "cat": "government", "exp": "Không biết luật không phải là lý do bào chữa; bạn vẫn có thể bị truy tố."}, {"q": "To drive a car legally in Australia, you must have:", "options": ["A passport only", "A local driver's licence and a registered car", "Permission from a councillor", "Nothing"], "answer": 1, "cat": "government", "exp": "Để lái xe ở Úc bạn phải có bằng lái địa phương và xe phải được đăng ký."}, {"q": "Which is illegal while driving in Australia?", "options": ["Wearing a seatbelt", "Using a hand-held mobile phone", "Following speed limits", "Stopping at red lights"], "answer": 1, "cat": "government", "exp": "Dùng điện thoại cầm tay khi lái xe là phạm pháp; lái xe sau khi dùng ma tuý hoặc vượt nồng độ cồn cũng vậy."}, {"q": "Australian values are based on freedom, respect, fairness and:", "options": ["Wealth", "Equality of opportunity", "Religion", "Power"], "answer": 1, "cat": "values", "exp": "Giá trị Úc dựa trên tự do, tôn trọng, công bằng và bình đẳng về cơ hội."}, {"q": "Under the Rule of Law, all Australians are:", "options": ["Above the law", "Equal in relation to the law", "Exempt if wealthy", "Judged by religion"], "answer": 1, "cat": "values", "exp": "Theo pháp quyền, mọi người Úc đều bình đẳng trước pháp luật; không ai đứng trên luật."}, {"q": "You should follow the law:", "options": ["Only when convenient", "Even if no one is watching", "Only in public", "Only if you are a citizen"], "answer": 1, "cat": "values", "exp": "Bạn nên tuân thủ luật ngay cả khi không có ai chứng kiến."}, {"q": "Australian laws apply to:", "options": ["Only citizens", "All people in Australia regardless of background or culture", "Only adults", "Only migrants"], "answer": 1, "cat": "values", "exp": "Luật Úc áp dụng cho MỌI người ở Úc, bất kể xuất thân hay văn hoá."}, {"q": "Voting in Australia is compulsory, which shows the importance of:", "options": ["Paying tax", "Participating in elections", "Owning property", "Learning English"], "answer": 1, "cat": "values", "exp": "Bầu cử bắt buộc thể hiện tầm quan trọng của việc tham gia bầu cử."}, {"q": "It is never acceptable to:", "options": ["Criticise the government", "Promote violence against a person or group", "Vote", "Join a union"], "answer": 1, "cat": "values", "exp": "Không bao giờ được cổ vũ bạo lực chống lại người khác hay một nhóm người — trái với giá trị và luật Úc."}, {"q": "Under freedom of speech, it is illegal to:", "options": ["Discuss politics", "Make false allegations or encourage others to break the law", "Read newspapers", "Peacefully protest"], "answer": 1, "cat": "values", "exp": "Được nói điều mình nghĩ, nhưng đưa ra cáo buộc sai sự thật hoặc xúi giục người khác phạm luật là bất hợp pháp."}, {"q": "In Australia, religious laws have:", "options": ["Higher status than Australian law", "No legal status", "Equal status to Australian law", "Priority in courts"], "answer": 1, "cat": "values", "exp": "Luật tôn giáo KHÔNG có giá trị pháp lý ở Úc; luật Úc phải được mọi người tuân theo."}, {"q": "Polygamy (being married to more than one person) is:", "options": ["Legal", "Against the law in Australia", "A private matter", "Allowed for some"], "answer": 1, "cat": "values", "exp": "Đa thê (polygamy) là phạm pháp ở Úc và có thể bị phạt nặng, kể cả tù."}, {"q": "Forced marriage in Australia is:", "options": ["Acceptable in some cultures", "Against the law", "Legal with consent of parents", "A private family matter"], "answer": 1, "cat": "values", "exp": "Hôn nhân ép buộc (forced marriage) là phạm pháp ở Úc và có thể bị phạt tù."}, {"q": "Religious intolerance in Australian society is:", "options": ["Acceptable", "Not acceptable", "Encouraged", "Required"], "answer": 1, "cat": "values", "exp": "Không khoan dung tôn giáo là điều KHÔNG được chấp nhận trong xã hội Úc."}, {"q": "Australian society values the equal rights of all people regardless of gender, age, disability, religion, race or:", "options": ["Wealth only", "Sexual orientation and national/ethnic origin", "Political party", "Job title"], "answer": 1, "cat": "values", "exp": "Xã hội Úc coi trọng quyền bình đẳng của mọi người bất kể giới tính, xu hướng tính dục, tuổi, khuyết tật, tôn giáo, chủng tộc hay nguồn gốc."}, {"q": "Under Australian law, two people can marry each other, including:", "options": ["Only a man and a woman", "Marriage between two men or two women", "Only citizens", "Only if the same religion"], "answer": 1, "cat": "values", "exp": "Theo luật Úc, hai người có thể kết hôn với nhau, kể cả hôn nhân đồng giới (hai nam hoặc hai nữ)."}, {"q": "Physical violence against a spouse or partner is:", "options": ["Sometimes acceptable", "Never acceptable and a criminal offence", "A private matter", "Allowed in marriage"], "answer": 1, "cat": "values", "exp": "Bạo lực thể chất với vợ/chồng/bạn đời KHÔNG BAO GIỜ được chấp nhận và là tội hình sự ở Úc."}, {"q": "Divorce in Australia is:", "options": ["Illegal", "Acceptable — either spouse may apply", "Only for men", "Requires the King's approval"], "answer": 1, "cat": "values", "exp": "Ly hôn được chấp nhận ở Úc; vợ hoặc chồng đều có thể xin ly hôn, kể cả khi người kia muốn tiếp tục hôn nhân."}, {"q": "It is a right in Australia for a woman to get a job ahead of a man if:", "options": ["She is older", "She has better qualifications and skills", "She is married", "She asks first"], "answer": 1, "cat": "values", "exp": "Ở Úc, phụ nữ có quyền được nhận việc trước nam giới nếu có trình độ và kỹ năng tốt hơn."}, {"q": "A 'fair go' means everyone, regardless of background, is given:", "options": ["The same wealth", "An equal opportunity to achieve success", "A government job", "Free housing"], "answer": 1, "cat": "values", "exp": "'Fair go' nghĩa là ai cũng có cơ hội bình đẳng để thành công, bất kể xuất thân."}, {"q": "What someone achieves in life should be a result of their:", "options": ["Wealth and family name", "Hard work and talents", "Religion", "Gender"], "answer": 1, "cat": "values", "exp": "Thành công nên đến từ nỗ lực và tài năng, không phải giới tính, giàu nghèo hay nguồn gốc."}, {"q": "When filling a job, the law supports selecting the person with the:", "options": ["Most money", "Best skills and experience", "Right religion", "Right gender"], "answer": 1, "cat": "values", "exp": "Khi tuyển người, luật ủng hộ chọn người có kỹ năng và kinh nghiệm tốt nhất cho công việc."}, {"q": "In Australia, individuals must respect the freedom and dignity of others, and their:", "options": ["Wealth", "Opinions and choices", "Religion only", "Political party"], "answer": 1, "cat": "values", "exp": "Mỗi người phải tôn trọng tự do, phẩm giá của người khác, cùng ý kiến và lựa chọn của họ."}, {"q": "Violence of any kind, including verbal and physical abuse, is:", "options": ["Sometimes allowed", "Illegal", "A private matter", "Acceptable if provoked"], "answer": 1, "cat": "values", "exp": "Bạo lực dưới mọi hình thức, kể cả lăng mạ và bạo hành thể chất, đều là bất hợp pháp."}, {"q": "The age of sexual consent in Australia is:", "options": ["14", "16 or 17 depending on the state/territory", "18", "21"], "answer": 1, "cat": "values", "exp": "Tuổi đồng thuận quan hệ tình dục ở Úc là 16 hoặc 17 tuỳ bang/lãnh thổ."}, {"q": "A 20-year-old man having sexual relations with a 15-year-old girl is:", "options": ["Legal", "Against the law in all Australian states and territories", "A private matter", "Allowed with consent"], "answer": 1, "cat": "values", "exp": "Điều này là phạm pháp ở tất cả các bang và lãnh thổ của Úc."}, {"q": "Racism in Australia:", "options": ["Is acceptable", "Has no place in Australia", "Is a private matter", "Is only illegal in sport"], "answer": 1, "cat": "values", "exp": "Phân biệt chủng tộc không có chỗ ở Úc, kể cả trên mạng hoặc nơi công cộng."}, {"q": "Australia values mutual respect and tolerance, which means:", "options": ["Everyone must agree", "Listening to and respecting others' views, even when different", "Ignoring others", "Only respecting your own group"], "answer": 1, "cat": "values", "exp": "Tôn trọng và khoan dung lẫn nhau: lắng nghe và tôn trọng ý kiến người khác, kể cả khi khác biệt."}, {"q": "Australians value 'mateship', which means:", "options": ["Owning a business together", "Helping each other in times of need", "Playing sport", "Living nearby"], "answer": 1, "cat": "values", "exp": "'Mateship' là tinh thần giúp đỡ lẫn nhau, đặc biệt trong lúc khó khăn."}, {"q": "An example of mateship is:", "options": ["Ignoring your neighbour", "Taking a meal to an elderly neighbour or driving a friend to an appointment", "Avoiding volunteering", "Refusing to help"], "answer": 1, "cat": "values", "exp": "Ví dụ về mateship: mang bữa ăn cho hàng xóm lớn tuổi, chở bạn đi khám bệnh, thăm người ốm."}, {"q": "Australia has a strong tradition of community service and:", "options": ["Gambling", "Volunteering", "Isolation", "Tax avoidance"], "answer": 1, "cat": "values", "exp": "Úc có truyền thống mạnh về phục vụ cộng đồng và làm tình nguyện."}, {"q": "Australian society values English as the national language because it:", "options": ["Is the only language allowed", "Helps people get an education, a job and integrate", "Replaces other languages", "Is required by religion"], "answer": 1, "cat": "values", "exp": "Tiếng Anh là ngôn ngữ quốc gia và yếu tố gắn kết xã hội; giúp học hành, có việc làm và hoà nhập."}, {"q": "Applicants for citizenship must undertake to make reasonable efforts to:", "options": ["Change religion", "Learn the English language if it is not their native language", "Buy property", "Join a party"], "answer": 1, "cat": "values", "exp": "Người xin nhập tịch phải cam kết nỗ lực hợp lý để học tiếng Anh nếu đó không phải tiếng mẹ đẻ."}, {"q": "If you know a child is being abused, you should:", "options": ["Ignore it", "Report it to the police", "Keep it secret", "Wait a year"], "answer": 1, "cat": "values", "exp": "Nếu biết một đứa trẻ bị lạm dụng, bạn nên báo cảnh sát để điều tra."}, {"q": "If you suspect someone is planning a serious crime, you should:", "options": ["Join them", "Report it to Australian government authorities as soon as possible", "Do nothing", "Tell no one"], "answer": 1, "cat": "values", "exp": "Nếu nghi ngờ ai đó chuẩn bị phạm tội nghiêm trọng, hãy báo cơ quan chức năng càng sớm càng tốt để bảo vệ cộng đồng."}, {"q": "Cyber abuse (online abuse) in Australia is:", "options": ["Always legal", "Often illegal and not accepted", "Encouraged", "A private matter"], "answer": 1, "cat": "values", "exp": "Lạm dụng mạng (cyber abuse) như chia sẻ ảnh riêng tư không xin phép, theo dõi online, hay lời lẽ phân biệt chủng tộc — nhiều hình thức là phạm pháp."}, {"q": "Australian citizens may hold citizenship of another country. This is called:", "options": ["Single citizenship", "Dual or multiple citizenship", "No citizenship", "Temporary citizenship"], "answer": 1, "cat": "values", "exp": "Công dân Úc có thể giữ quốc tịch nước khác nếu luật nước đó cho phép — gọi là hai/đa quốc tịch (dual citizenship)."}, {"q": "Even with dual citizenship, an Australian citizen within Australia must:", "options": ["Choose one country", "Follow all Australian laws at all times", "Follow foreign laws", "Pay double tax"], "answer": 1, "cat": "values", "exp": "Dù có hai quốc tịch, công dân Úc khi ở Úc phải tuân thủ mọi luật Úc mọi lúc."}, {"q": "It is illegal for Australians, here or overseas, to have any sexual activity with a child under:", "options": ["12", "16", "18", "21"], "answer": 1, "cat": "values", "exp": "Người Úc, dù ở trong nước hay nước ngoài, tuyệt đối không được có hoạt động tình dục với trẻ dưới 16 tuổi."}, {"q": "Sharing official government secrets on social media would be:", "options": ["Acceptable", "Undermining Australia's interests and security", "Encouraged", "A private choice"], "answer": 1, "cat": "values", "exp": "Chia sẻ bí mật chính phủ trên mạng xã hội là làm tổn hại lợi ích và an ninh của nước Úc."}, {"q": "Promoting distrust and fear of an ethnic community would:", "options": ["Be encouraged", "Damage Australian community relations", "Be a private matter", "Be legal"], "answer": 1, "cat": "values", "exp": "Kích động sự nghi kỵ và sợ hãi với một cộng đồng sắc tộc sẽ làm tổn hại quan hệ cộng đồng ở Úc."}, {"q": "Everyone in Australia has a responsibility to try to:", "options": ["Become wealthy", "Support themselves and their families when able", "Join a political party", "Own a home"], "answer": 1, "cat": "values", "exp": "Mọi người có trách nhiệm cố gắng tự nuôi sống bản thân và gia đình khi có khả năng."}, {"q": "You should obey a lawful request from the police because:", "options": ["They will pay you", "All Australians commit to following the law", "They are the government", "You have no choice ever"], "answer": 1, "cat": "values", "exp": "Nên tuân theo yêu cầu hợp pháp của cảnh sát vì mọi người Úc cam kết tuân thủ pháp luật."}]</script>
+<script>
+const IMAGES = {
+  // Australian National Flag — REAL public-domain image via Wikimedia Commons Special:FilePath
+  flagNational: {
+    type: 'external',
+    src: 'https://commons.wikimedia.org/wiki/Special:FilePath/Flag_of_Australia_(converted).svg',
+    alt: 'Flag of Australia',
+    credit: 'Public domain (PD-Australia) — Wikimedia Commons',
+    creditUrl: 'https://commons.wikimedia.org/wiki/File:Flag_of_Australia_(converted).svg'
+  },
+
+  // Aboriginal Flag — copyright held by Commonwealth of Australia since 2022, free for public use
+  flagAboriginal: {
+    type: 'external',
+    src: 'https://commons.wikimedia.org/wiki/Special:FilePath/Australian_Aboriginal_Flag.svg',
+    alt: 'Australian Aboriginal Flag',
+    credit: 'Designed by Harold Thomas; free for public use — Wikimedia Commons',
+    creditUrl: 'https://commons.wikimedia.org/wiki/File:Australian_Aboriginal_Flag.svg'
+  },
+
+  // Torres Strait Islander Flag — STILL COPYRIGHTED (Torres Strait Islands Coordinating Council).
+  // Kept as an original illustrative drawing, not a reproduction of the official artwork.
+  flagTorres: {type:'svg', svg: `<svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+    <rect width="60" height="30" fill="#0072ce"/>
+    <rect width="60" height="4" fill="#1a9850"/>
+    <rect y="26" width="60" height="4" fill="#1a9850"/>
+    <line x1="0" y1="4" x2="60" y2="4" stroke="#000" stroke-width="1"/>
+    <line x1="0" y1="26" x2="60" y2="26" stroke="#000" stroke-width="1"/>
+    <path d="M25,10 Q25,15 30,15 Q35,15 35,10 L35,20 Q35,15 30,15 Q25,15 25,20 Z" fill="#fff"/>
+    <polygon points="30,10 31,13 34,13 31.5,15 32.5,18 30,16.2 27.5,18 28.5,15 26,13 29,13" fill="#e4032e" transform="scale(0.9) translate(3,-1)"/>
+  </svg>`},
+
+  // Commonwealth Coat of Arms (simplified)
+  coatOfArms: {type:'svg', svg: `<svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
+    <!-- wattle background dots -->
+    <g fill="#f4c542" opacity="0.5">
+      <circle cx="10" cy="15" r="3"/><circle cx="20" cy="8" r="2.5"/><circle cx="85" cy="12" r="3"/><circle cx="92" cy="20" r="2.5"/>
+      <circle cx="8" cy="70" r="2.5"/><circle cx="90" cy="72" r="3"/>
+    </g>
+    <!-- shield -->
+    <g transform="translate(50,40)">
+      <path d="M-18,-20 H18 V5 Q18,20 0,28 Q-18,20 -18,5 Z" fill="#fff" stroke="#1a3a6b" stroke-width="1.5"/>
+      <rect x="-18" y="-20" width="12" height="10.6" fill="#c8102e"/>
+      <rect x="-6" y="-20" width="12" height="10.6" fill="#fff" stroke="#1a3a6b" stroke-width="0.5"/>
+      <rect x="6" y="-20" width="12" height="10.6" fill="#00247d"/>
+      <rect x="-18" y="-9.4" width="12" height="10.6" fill="#00247d"/>
+      <rect x="-6" y="-9.4" width="12" height="10.6" fill="#fff" stroke="#1a3a6b" stroke-width="0.5"/>
+      <rect x="6" y="-9.4" width="12" height="10.6" fill="#c8102e"/>
+      <circle cx="0" cy="6" r="7" fill="#fff" stroke="#1a3a6b" stroke-width="0.8"/>
+      <polygon points="0,1 1.4,5 6,5 2.3,7.6 3.7,12 0,9.3 -3.7,12 -2.3,7.6 -6,5 -1.4,5" fill="#c8102e"/>
+    </g>
+    <!-- star above shield -->
+    <polygon points="50,4 52,10 58,10 53,13.5 55,19.5 50,16 45,19.5 47,13.5 42,10 48,10" fill="#f4c542" stroke="#8a6d12" stroke-width="0.5"/>
+    <!-- kangaroo (left, simplified) -->
+    <g transform="translate(14,50)" fill="#8b5a2b">
+      <ellipse cx="0" cy="10" rx="9" ry="14"/>
+      <circle cx="-2" cy="-6" r="6"/>
+      <ellipse cx="4" cy="20" rx="3" ry="9" transform="rotate(20 4 20)"/>
+    </g>
+    <!-- emu (right, simplified) -->
+    <g transform="translate(86,50)" fill="#4a4a4a">
+      <ellipse cx="0" cy="12" rx="7" ry="16"/>
+      <path d="M0,-4 Q-3,-14 2,-20" stroke="#4a4a4a" stroke-width="3" fill="none"/>
+      <circle cx="2" cy="-20" r="2.5"/>
+    </g>
+    <text x="50" y="86" font-size="9" text-anchor="middle" fill="#1a3a6b" font-weight="bold" font-family="serif">AUSTRALIA</text>
+  </svg>`},
+
+  // Golden wattle
+  goldenWattle: {type:'svg', svg: `<svg viewBox="0 0 80 60" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10,50 Q30,30 50,15" stroke="#5a7d3a" stroke-width="2.5" fill="none"/>
+    <g fill="#68954a">
+      <path d="M15,45 l-6,-3 M18,40 l-7,-2 M22,35 l-6,-4 M26,30 l-6,-3 M30,26 l-5,-4 M34,22 l-5,-3" stroke="#5a7d3a" stroke-width="1.4"/>
+    </g>
+    <g fill="#f4c542">
+      <circle cx="20" cy="42" r="4.5"/><circle cx="28" cy="35" r="5"/><circle cx="36" cy="27" r="4.5"/>
+      <circle cx="44" cy="20" r="5"/><circle cx="52" cy="14" r="4"/>
+      <circle cx="15" cy="48" r="3.5"/><circle cx="24" cy="38" r="3"/><circle cx="40" cy="24" r="3.5"/>
+    </g>
+    <g fill="#ffe27a">
+      <circle cx="20" cy="42" r="2"/><circle cx="28" cy="35" r="2.2"/><circle cx="36" cy="27" r="2"/>
+      <circle cx="44" cy="20" r="2.2"/><circle cx="52" cy="14" r="1.8"/>
+    </g>
+  </svg>`},
+
+  // Opal gemstone
+  opal: {type:'svg', svg: `<svg viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="30" cy="20" rx="26" ry="16" fill="#dfe6e0"/>
+    <ellipse cx="30" cy="20" rx="26" ry="16" fill="url(#opalGrad)" opacity="0.85"/>
+    <defs><radialGradient id="opalGrad" cx="40%" cy="40%">
+      <stop offset="0%" stop-color="#a0e8d8"/>
+      <stop offset="35%" stop-color="#7fd4e8"/>
+      <stop offset="60%" stop-color="#e88fd4"/>
+      <stop offset="85%" stop-color="#f4d67a"/>
+      <stop offset="100%" stop-color="#8fc4e8"/>
+    </radialGradient></defs>
+    <ellipse cx="30" cy="20" rx="26" ry="16" fill="none" stroke="#b8bfb8" stroke-width="1.5"/>
+  </svg>`},
+
+  // Commonwealth Star (7 points) close-up
+  commonwealthStar: {type:'svg', svg: `<svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="30" cy="30" r="28" fill="#00247d"/>
+    <polygon points="30,4 34,20 30,22 34.8,23.5 32,27 37,30 31.5,31.5 35,36.5 29,35 29.5,41 25.5,37 23,42.5 21.5,36.5 16,39 19,33.5 13,32 18.5,29 14,25 20,25.5 18,19.5 24,22 25,16" fill="#fff" stroke="#00247d" stroke-width="0.3"/>
+    <text x="30" y="55" font-size="6" text-anchor="middle" fill="#fff">7 points</text>
+  </svg>`},
+
+  // Parliament House Canberra (simplified icon)
+  parliamentHouse: {type:'svg', svg: `<svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="60" fill="#cfe0f0"/>
+    <rect x="10" y="38" width="80" height="16" fill="#d8d2c0"/>
+    <polygon points="15,38 50,20 85,38" fill="#c8c2ae"/>
+    <rect x="46" y="10" width="8" height="14" fill="#8a8a7a"/>
+    <line x1="50" y1="4" x2="50" y2="10" stroke="#555" stroke-width="1"/>
+    <rect x="20" y="42" width="6" height="10" fill="#5a5a4a"/>
+    <rect x="30" y="42" width="6" height="10" fill="#5a5a4a"/>
+    <rect x="64" y="42" width="6" height="10" fill="#5a5a4a"/>
+    <rect x="74" y="42" width="6" height="10" fill="#5a5a4a"/>
+    <rect x="0" y="54" width="100" height="6" fill="#7a9b5a"/>
+  </svg>`},
+
+  // High Court of Australia (simplified icon)
+  highCourt: {type:'svg', svg: `<svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="60" fill="#e3ecf5"/>
+    <polygon points="50,8 85,26 15,26" fill="#b9c4cf"/>
+    <rect x="18" y="26" width="64" height="24" fill="#cfd8e0"/>
+    <rect x="24" y="30" width="6" height="18" fill="#8a97a3"/>
+    <rect x="36" y="30" width="6" height="18" fill="#8a97a3"/>
+    <rect x="48" y="30" width="6" height="18" fill="#8a97a3"/>
+    <rect x="60" y="30" width="6" height="18" fill="#8a97a3"/>
+    <rect x="72" y="30" width="6" height="18" fill="#8a97a3"/>
+    <rect x="0" y="50" width="100" height="10" fill="#9fb3c4"/>
+  </svg>`},
+
+  // King Charles III crown icon (symbolic, not a photo)
+  crown: {type:'svg', svg: `<svg viewBox="0 0 60 44" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="8,40 8,20 18,30 30,12 42,30 52,20 52,40" fill="#f4c542" stroke="#8a6d12" stroke-width="1.5"/>
+    <rect x="8" y="38" width="44" height="5" fill="#c8102e" stroke="#8a6d12" stroke-width="1"/>
+    <circle cx="8" cy="20" r="3" fill="#e4032e"/>
+    <circle cx="30" cy="12" r="3.5" fill="#00247d"/>
+    <circle cx="52" cy="20" r="3" fill="#e4032e"/>
+  </svg>`},
+
+  // Map pin cluster for states (simple map icon)
+  mapStates: {type:'svg', svg: `<svg viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="80" fill="#eef3f1"/>
+    <path d="M10,60 Q20,20 45,15 Q70,10 90,30 Q95,50 80,68 Q50,78 25,72 Q10,68 10,60 Z" fill="#c9a227" opacity="0.35"/>
+    <path d="M10,60 Q20,20 45,15 Q70,10 90,30 Q95,50 80,68 Q50,78 25,72 Q10,68 10,60 Z" fill="none" stroke="#8a6d12" stroke-width="1.5"/>
+    <circle cx="78" cy="45" r="2.5" fill="#c0392b"/><text x="82" y="47" font-size="7" fill="#333">Sydney</text>
+    <circle cx="65" cy="58" r="2.5" fill="#c0392b"/><text x="69" y="60" font-size="7" fill="#333">Melbourne</text>
+    <circle cx="80" cy="25" r="2.5" fill="#c0392b"/><text x="84" y="27" font-size="7" fill="#333">Brisbane</text>
+    <circle cx="18" cy="42" r="2.5" fill="#c0392b"/><text x="22" y="44" font-size="7" fill="#333">Perth</text>
+    <circle cx="48" cy="62" r="2.5" fill="#c0392b"/><text x="52" y="70" font-size="7" fill="#333">Adelaide</text>
+    <circle cx="58" cy="72" r="2" fill="#c0392b"/><text x="45" y="79" font-size="6" fill="#333">Hobart</text>
+    <circle cx="55" cy="20" r="2" fill="#c0392b"/><text x="30" y="16" font-size="6" fill="#333">Darwin</text>
+    <circle cx="63" cy="48" r="2" fill="#111"/><text x="63" y="42" font-size="6" fill="#333">Canberra</text>
+  </svg>`}
+};
+
+const MINDMAPS = {
+  people: {
+    en: "Australia & its people", vi: "Nước Úc & con người",
+    children: [
+      { en:"First peoples", vi:"Người dân đầu tiên", children:[
+        { en:"Aboriginal — mainland & Tasmania", vi:"Thổ dân — đại lục & Tasmania" },
+        { en:"Torres Strait Islander — northern islands", vi:"Dân đảo Torres Strait — các đảo phía bắc" },
+        { en:"Oldest continuous cultures", vi:"Văn hoá liên tục lâu đời nhất" }
+      ]},
+      { en:"Key history", vi:"Lịch sử chính", children:[
+        { en:"1788 — First Fleet arrives", vi:"1788 — Hạm đội Đầu tiên đến" },
+        { en:"1851 — Gold rush", vi:"1851 — Cơn sốt vàng" },
+        { en:"1901 — Federation", vi:"1901 — Liên bang hoá" },
+        { en:"1967 — Referendum", vi:"1967 — Trưng cầu dân ý" }
+      ]},
+      { en:"States & territories", vi:"Bang & lãnh thổ", children:[
+        { en:"6 states + 2 territories", vi:"6 bang + 2 lãnh thổ" },
+        { en:"Canberra — national capital", vi:"Canberra — thủ đô" },
+        { en:"WA largest · Tasmania smallest", vi:"WA lớn nhất · Tasmania nhỏ nhất" }
+      ]},
+      { en:"Symbols", vi:"Biểu tượng", children:[
+        { en:"National Flag (Union Jack, Star, Cross)", vi:"Cờ Quốc gia (Union Jack, Sao, Nam Thập Tự)" },
+        { en:"Golden wattle — national flower", vi:"Keo hoa vàng — quốc hoa" },
+        { en:"Green & gold — national colours", vi:"Xanh lá & vàng — màu quốc gia" },
+        { en:"Anthem: Advance Australia Fair", vi:"Quốc ca: Advance Australia Fair" }
+      ]},
+      { en:"Important days", vi:"Ngày quan trọng", children:[
+        { en:"Australia Day — 26 Jan", vi:"Australia Day — 26/1" },
+        { en:"Anzac Day — 25 Apr (Gallipoli 1915)", vi:"Anzac Day — 25/4 (Gallipoli 1915)" }
+      ]}
+    ]
+  },
+
+  rights: {
+    en: "Democratic beliefs & rights", vi: "Niềm tin dân chủ & quyền",
+    children: [
+      { en:"Core beliefs", vi:"Niềm tin cốt lõi", children:[
+        { en:"Parliamentary democracy", vi:"Dân chủ nghị viện" },
+        { en:"Rule of Law — no one above the law", vi:"Pháp quyền — không ai trên luật" },
+        { en:"Peaceful change, not violence", vi:"Thay đổi ôn hoà, không bạo lực" }
+      ]},
+      { en:"Four freedoms", vi:"Bốn quyền tự do", children:[
+        { en:"Speech", vi:"Ngôn luận" },
+        { en:"Expression", vi:"Biểu đạt" },
+        { en:"Association", vi:"Hội họp / lập hội" },
+        { en:"Religion (secular state)", vi:"Tôn giáo (nhà nước thế tục)" }
+      ]},
+      { en:"Responsibilities", vi:"Trách nhiệm", children:[
+        { en:"Obey the law", vi:"Tuân thủ luật" },
+        { en:"Vote (18+)", vi:"Đi bầu (18+)" },
+        { en:"Defend Australia if needed", vi:"Bảo vệ nước Úc khi cần" },
+        { en:"Jury service if called", vi:"Làm bồi thẩm nếu được gọi" }
+      ]},
+      { en:"Privileges", vi:"Đặc quyền", children:[
+        { en:"Apply for a passport", vi:"Xin hộ chiếu" },
+        { en:"Seek election (if not dual citizen)", vi:"Ứng cử (nếu không 2 quốc tịch)" },
+        { en:"APS / Defence Force jobs", vi:"Việc trong Công vụ / Quân đội" },
+        { en:"Consular help overseas", vi:"Trợ giúp lãnh sự ở nước ngoài" }
+      ]}
+    ]
+  },
+
+  government: {
+    en: "Government & the law", vi: "Chính phủ & luật pháp",
+    children: [
+      { en:"Head of State", vi:"Nguyên thủ quốc gia", children:[
+        { en:"King Charles III", vi:"Vua Charles III" },
+        { en:"→ Governor-General (his representative)", vi:"→ Toàn quyền (đại diện của Vua)" },
+        { en:"Constitutional monarchy", vi:"Quân chủ lập hiến" }
+      ]},
+      { en:"3 arms of power (separation)", vi:"3 nhánh quyền lực (phân lập)", children:[
+        { en:"Legislative — Parliament makes laws", vi:"Lập pháp — Quốc hội làm luật" },
+        { en:"Executive — PM, ministers, G-G carry out laws", vi:"Hành pháp — Thủ tướng, bộ trưởng, Toàn quyền thi hành luật" },
+        { en:"Judicial — courts interpret laws", vi:"Tư pháp — toà án giải thích luật" }
+      ]},
+      { en:"Parliament (2 houses)", vi:"Quốc hội (2 viện)", children:[
+        { en:"House of Reps — 150+ MPs (People's House)", vi:"Hạ viện — 150+ nghị sĩ (Viện của Dân)" },
+        { en:"Senate — 76 senators (States' House)", vi:"Thượng viện — 76 TNS (Viện các Bang)" },
+        { en:"12 per state · 2 per territory", vi:"12 mỗi bang · 2 mỗi lãnh thổ" }
+      ]},
+      { en:"3 levels of government", vi:"3 cấp chính quyền", children:[
+        { en:"Federal — defence, immigration, tax", vi:"Liên bang — quốc phòng, nhập cư, thuế" },
+        { en:"State/territory — hospitals, schools, police", vi:"Tiểu bang/lãnh thổ — bệnh viện, trường, cảnh sát" },
+        { en:"Local — rubbish, local roads, parks", vi:"Địa phương — rác, đường nội bộ, công viên" }
+      ]},
+      { en:"Leaders", vi:"Người lãnh đạo", children:[
+        { en:"Federal → Prime Minister", vi:"Liên bang → Thủ tướng" },
+        { en:"State → Premier", vi:"Bang → Premier (Thủ hiến)" },
+        { en:"Territory → Chief Minister", vi:"Lãnh thổ → Chief Minister" },
+        { en:"Local → Mayor / Shire President", vi:"Địa phương → Thị trưởng" }
+      ]},
+      { en:"Elections & Constitution", vi:"Bầu cử & Hiến pháp", children:[
+        { en:"Voting compulsory · secret ballot", vi:"Bầu bắt buộc · phiếu kín" },
+        { en:"AEC runs elections (independent)", vi:"AEC tổ chức bầu cử (độc lập)" },
+        { en:"Constitution effect 1 Jan 1901", vi:"Hiến pháp hiệu lực 1/1/1901" },
+        { en:"Change needs double majority", vi:"Sửa đổi cần đa số kép" }
+      ]},
+      { en:"Making & enforcing law", vi:"Làm & thực thi luật", children:[
+        { en:"Bill → passed by both houses → Royal Assent", vi:"Bill → 2 viện thông qua → Royal Assent" },
+        { en:"Courts & judges independent", vi:"Toà án & thẩm phán độc lập" },
+        { en:"Jury decides guilt", vi:"Bồi thẩm quyết định có tội" },
+        { en:"AFP — federal crimes", vi:"AFP — tội phạm liên bang" }
+      ]}
+    ]
+  },
+
+  values: {
+    en: "Australian values (5/5 required)", vi: "Giá trị Úc (bắt buộc 5/5)",
+    children: [
+      { en:"Golden rules", vi:"Quy tắc vàng", children:[
+        { en:"Australian law always beats religious/cultural practice", vi:"Luật Úc luôn thắng tập tục tôn giáo/văn hoá" },
+        { en:"Violence is never acceptable", vi:"Bạo lực không bao giờ được chấp nhận" }
+      ]},
+      { en:"Core values", vi:"Giá trị cốt lõi", children:[
+        { en:"Freedom", vi:"Tự do" },
+        { en:"Respect", vi:"Tôn trọng" },
+        { en:"Fairness — a fair go", vi:"Công bằng — a fair go" },
+        { en:"Equality of opportunity", vi:"Bình đẳng cơ hội" }
+      ]},
+      { en:"Equality under law", vi:"Bình đẳng trước pháp luật", children:[
+        { en:"Same-sex marriage legal", vi:"Hôn nhân đồng giới hợp pháp" },
+        { en:"Men & women equal", vi:"Nam & nữ bình đẳng" },
+        { en:"Domestic violence = crime", vi:"Bạo hành gia đình = tội" }
+      ]},
+      { en:"Illegal practices", vi:"Tập tục phạm pháp", children:[
+        { en:"Polygamy", vi:"Đa thê" },
+        { en:"Forced marriage", vi:"Hôn nhân ép buộc" },
+        { en:"Racism / religious intolerance", vi:"Phân biệt chủng tộc / kỳ thị tôn giáo" }
+      ]},
+      { en:"Living together", vi:"Sống chung", children:[
+        { en:"Mateship — help in hard times", vi:"Mateship — giúp nhau lúc khó" },
+        { en:"Mutual respect & tolerance", vi:"Tôn trọng & khoan dung lẫn nhau" },
+        { en:"Learn English", vi:"Học tiếng Anh" },
+        { en:"Loyalty (dual citizenship OK)", vi:"Trung thành (2 quốc tịch OK)" }
+      ]}
+    ]
+  }
+};
+
+const LESSONS = {
+  people: {
+    title: "Part 1: Australia and its people",
+    titleVi: "Phần 1: Nước Úc và con người",
+    sections: [
+      {
+        en: `<b>First inhabitants.</b> Aboriginal and Torres Strait Islander peoples are Australia's first inhabitants, with the oldest continuous cultures in the world. Aboriginal peoples arrived between 65,000 and 40,000 years ago. Torres Strait Islander people are from islands between the northern tip of Queensland and Papua New Guinea.`,
+        vi: `<b>Người dân đầu tiên.</b> Người Thổ dân (Aboriginal) và người dân đảo Torres Strait là những cư dân đầu tiên của nước Úc, sở hữu nền văn hoá liên tục lâu đời nhất thế giới. Người Thổ dân đã có mặt từ 65.000 đến 40.000 năm trước. Người dân đảo Torres Strait đến từ các đảo nằm giữa mũi phía bắc bang Queensland và Papua New Guinea.`
+      },
+      {
+        en: `<b>The First Fleet (1788).</b> European settlement began when 11 convict ships — the "First Fleet" — arrived from Great Britain on <b>26 January 1788</b>. British jails were overcrowded, so convicts were transported to the new colony of New South Wales. <b>Captain Arthur Phillip</b> was the first Governor of NSW. Early free settlers mostly came from Britain and Ireland.`,
+        vi: `<b>Hạm đội Đầu tiên (1788).</b> Việc định cư của người châu Âu bắt đầu khi 11 con tàu chở tù nhân — gọi là "Hạm đội Đầu tiên" (First Fleet) — đến từ Anh Quốc vào ngày <b>26 tháng 1 năm 1788</b>. Do nhà tù ở Anh quá tải, tù nhân bị đưa sang thuộc địa mới New South Wales. <b>Đại uý Arthur Phillip</b> là Thống đốc đầu tiên của NSW. Những người định cư tự do ban đầu chủ yếu đến từ Anh và Ireland.`
+      },
+      {
+        en: `<b>The gold rush (1851).</b> Gold was discovered in NSW and Victoria, drawing people worldwide. Chinese migrants arriving then were the first large non-European group. Australia's population more than doubled within 10 years.`,
+        vi: `<b>Cơn sốt vàng (1851).</b> Vàng được phát hiện ở NSW và Victoria, thu hút người từ khắp nơi trên thế giới. Người Trung Quốc đến vào thời điểm này là nhóm di dân lớn đầu tiên không phải người châu Âu. Dân số Úc tăng hơn gấp đôi chỉ trong 10 năm.`
+      },
+      {
+        en: `<b>Federation (1901).</b> The six separate British colonies united into the <b>Commonwealth of Australia</b> on 1 January 1901. This established the national parliament, government and High Court under a new Constitution. Population was about four million — not including Aboriginal and Torres Strait Islander peoples, who were only included in official counts after the <b>1967 Referendum</b>.`,
+        vi: `<b>Liên bang hoá (1901).</b> Sáu thuộc địa riêng biệt của Anh hợp nhất thành <b>Liên bang Úc</b> (Commonwealth of Australia) vào ngày 1/1/1901. Sự kiện này lập ra quốc hội, chính phủ và Toà Thượng thẩm theo Hiến pháp mới. Dân số lúc đó khoảng bốn triệu người — chưa tính người Thổ dân và dân đảo Torres Strait, những người chỉ được tính vào thống kê chính thức sau <b>cuộc trưng cầu dân ý năm 1967</b>.`
+      },
+      {
+        en: `<b>Migration since.</b> After World War II, a large wave of non-British migrants arrived from Europe. In recent decades, migrants and refugees have come from all over the world. English is Australia's national language — migrants are expected to learn and use it — but more than 100 Aboriginal and Torres Strait Islander languages are also valued.`,
+        vi: `<b>Di dân về sau.</b> Sau Thế chiến II, một làn sóng lớn di dân không phải người Anh đến từ châu Âu. Trong những thập kỷ gần đây, di dân và người tị nạn đến từ khắp nơi trên thế giới. Tiếng Anh là ngôn ngữ quốc gia của Úc — di dân được khuyến khích học và sử dụng — nhưng hơn 100 ngôn ngữ của người Thổ dân và dân đảo Torres Strait cũng được trân trọng.`
+      },
+      {
+        img: "mapStates",
+        imgLabel: "Bản đồ các bang & thủ phủ / States & capitals map",
+        en: `<b>States and territories.</b> Australia has <b>six states</b> (NSW–Sydney, Victoria–Melbourne, Queensland–Brisbane, Western Australia–Perth, South Australia–Adelaide, Tasmania–Hobart) and <b>two mainland territories</b> (ACT–Canberra, Northern Territory–Darwin). Canberra is the national capital. WA is the largest state; NSW was the first colony and Sydney is the largest city; Victoria is the smallest mainland state; Tasmania is the smallest state overall, separated from the mainland by Bass Strait.`,
+        vi: `<b>Các bang và lãnh thổ.</b> Úc có <b>sáu bang</b> (NSW–Sydney, Victoria–Melbourne, Queensland–Brisbane, Western Australia–Perth, South Australia–Adelaide, Tasmania–Hobart) và <b>hai lãnh thổ đại lục</b> (ACT–Canberra, Northern Territory–Darwin). Canberra là thủ đô quốc gia. WA là bang lớn nhất; NSW là thuộc địa đầu tiên và Sydney là thành phố lớn nhất; Victoria là bang nhỏ nhất trên đại lục; Tasmania là bang nhỏ nhất cả nước, cách đại lục bởi eo biển Bass Strait.`
+      },
+      {
+        en: `<b>Welcome to Country & Acknowledgement of Country.</b> A <b>Welcome to Country</b> is performed by an Aboriginal or Torres Strait Islander custodian of the local region, usually as the first item to open an event. An <b>Acknowledgement of Country</b> can be delivered by anyone (often the Chair or MC) to show respect for Traditional Owners.`,
+        vi: `<b>Welcome to Country & Acknowledgement of Country.</b> Nghi thức <b>Welcome to Country</b> do một người trông coi truyền thống (custodian) là người Thổ dân hoặc dân đảo Torres Strait của vùng đó thực hiện, thường là phần mở đầu của sự kiện. <b>Acknowledgement of Country</b> có thể do bất kỳ ai đọc (thường là chủ toạ hoặc MC) để bày tỏ tôn trọng với Chủ nhân Truyền thống của vùng đất.`
+      },
+      {
+        en: `<b>Important days.</b> <b>Australia Day (26 January)</b> marks the arrival of the First Fleet and celebrates all Australians' contributions. <b>Anzac Day (25 April)</b> commemorates the Gallipoli landing in 1915 and honours all who served and died in war.`,
+        vi: `<b>Các ngày quan trọng.</b> <b>Australia Day (26/1)</b> kỷ niệm ngày Hạm đội Đầu tiên đến và tôn vinh đóng góp của mọi người dân Úc. <b>Anzac Day (25/4)</b> tưởng niệm cuộc đổ bộ Gallipoli năm 1915, tôn vinh những người đã phục vụ và hy sinh trong chiến tranh.`
+      },
+      {
+        imgRow: [
+          {img:"flagNational", label:"Cờ Quốc gia / National Flag"},
+          {img:"flagAboriginal", label:"Cờ Thổ dân / Aboriginal Flag"},
+          {img:"flagTorres", label:"Cờ Torres Strait / TSI Flag"}
+        ],
+        en: `<b>Flags and symbols.</b> The <b>National Flag</b> (blue, white, red) has the Union Jack (British heritage), the seven-point Commonwealth Star (6 states + territories), and the Southern Cross. The <b>Aboriginal Flag</b> is black (the people), red (the earth), yellow (the sun). The <b>Torres Strait Islander Flag</b> is green (land), blue (sea), black (the people), with a white dhari (headdress) and star (peace, five island groups). The <b>Commonwealth Coat of Arms</b> shows a shield (six states/federation) held by a kangaroo and emu, under the Commonwealth Star, on a golden wattle background. National flower: golden wattle. National colours: green and gold. National gemstone: opal. National anthem: "Advance Australia Fair".`,
+        vi: `<b>Cờ và biểu tượng.</b> <b>Cờ Quốc gia</b> (xanh dương, trắng, đỏ) có cờ Union Jack (di sản Anh), Ngôi sao Liên bang 7 cánh (6 bang + lãnh thổ), và chòm sao Nam Thập Tự. <b>Cờ Thổ dân</b> màu đen (con người), đỏ (đất đai), vàng (mặt trời). <b>Cờ dân đảo Torres Strait</b> màu xanh lá (đất), xanh dương (biển), đen (con người), có mũ dhari trắng và ngôi sao (hoà bình, 5 nhóm đảo). <b>Quốc huy Liên bang</b> có tấm khiên (sáu bang/liên bang) do kangaroo và emu đỡ, phía trên là Ngôi sao Liên bang, nền là hoa keo vàng. Quốc hoa: keo hoa vàng. Màu quốc gia: xanh lá và vàng. Đá quý quốc gia: opal. Quốc ca: "Advance Australia Fair".`
+      },
+      {
+        imgRow: [
+          {img:"coatOfArms", label:"Quốc huy / Coat of Arms"},
+          {img:"goldenWattle", label:"Quốc hoa / Golden Wattle"},
+          {img:"opal", label:"Đá quý quốc gia / Opal"}
+        ],
+        en: `<b>A closer look at the symbols above:</b> the Coat of Arms shield is divided into six parts for the six states, held by a kangaroo and emu — both native animals, neither can walk backwards, symbolising a nation that only moves forward. The golden wattle is a small tree with bright yellow flowers in spring. The opal is Australia's national gemstone — legend says a rainbow touched the earth and created its colours.`,
+        vi: `<b>Nhìn kỹ hơn các biểu tượng trên:</b> tấm khiên trên quốc huy chia làm sáu phần cho sáu bang, do kangaroo và emu đỡ hai bên — cả hai đều là loài vật bản địa, không loài nào đi lùi được, tượng trưng cho một quốc gia luôn tiến về phía trước. Hoa keo vàng là loại cây nhỏ nở hoa vàng rực vào mùa xuân. Opal là đá quý quốc gia của Úc — truyền thuyết kể rằng một cầu vồng chạm xuống đất và tạo nên màu sắc của nó.`
+      }
+    ],
+    keywords: [
+      ["First Fleet — 26 January 1788","Hạm đội Đầu tiên — 26/1/1788"],
+      ["Captain Arthur Phillip — first Governor of NSW","Đại uý Arthur Phillip — Thống đốc đầu tiên NSW"],
+      ["Gold rush — 1851","Cơn sốt vàng — 1851"],
+      ["Federation — 1 January 1901","Liên bang hoá — 1/1/1901"],
+      ["1967 Referendum — Aboriginal peoples counted in census","Trưng cầu dân ý 1967 — người Thổ dân được tính vào dân số"],
+      ["6 states + 2 mainland territories","6 bang + 2 lãnh thổ đại lục"],
+      ["Canberra — national capital","Canberra — thủ đô quốc gia"],
+      ["Australia Day — 26 January","Australia Day — 26/1"],
+      ["Anzac Day — 25 April (Gallipoli 1915)","Anzac Day — 25/4 (Gallipoli 1915)"],
+      ["Commonwealth Star — 7 points","Ngôi sao Liên bang — 7 cánh"],
+      ["National flower — golden wattle","Quốc hoa — keo hoa vàng"],
+      ["National anthem — Advance Australia Fair","Quốc ca — Advance Australia Fair"]
+    ]
+  },
+
+  rights: {
+    title: "Part 2: Australia's democratic beliefs, rights and liberties",
+    titleVi: "Phần 2: Niềm tin dân chủ, quyền và tự do của Úc",
+    sections: [
+      {
+        en: `<b>Parliamentary democracy.</b> Australia's government gets its power from the people — citizens vote for representatives in parliament, who must answer to the people through elections.`,
+        vi: `<b>Dân chủ nghị viện.</b> Chính phủ Úc có quyền lực từ người dân — công dân bầu ra đại diện trong quốc hội, và những đại diện này phải chịu trách nhiệm trước dân qua các cuộc bầu cử.`
+      },
+      {
+        en: `<b>The Rule of Law.</b> No person, group, or religious rule is above the law. Everyone — including government, religious and business leaders, and police — must obey Australia's laws.`,
+        vi: `<b>Pháp quyền (Rule of Law).</b> Không cá nhân, nhóm, hay quy tắc tôn giáo nào đứng trên luật pháp. Mọi người — kể cả lãnh đạo chính phủ, tôn giáo, doanh nghiệp, và cảnh sát — đều phải tuân thủ luật Úc.`
+      },
+      {
+        en: `<b>Living peacefully.</b> Australians believe change should come through discussion, peaceful persuasion, and the democratic process — never violence.`,
+        vi: `<b>Sống hoà bình.</b> Người Úc tin rằng thay đổi nên đến từ thảo luận, thuyết phục ôn hoà và tiến trình dân chủ — không bao giờ qua bạo lực.`
+      },
+      {
+        en: `<b>Four key freedoms.</b> <b>Speech/expression</b> — say, write, or create art/film/music expressing your views. <b>Association</b> — join or leave any legal group freely. <b>Religion</b> — Australia is secular with no official religion; follow any religion or none. In every case, Australian law must always be obeyed, and where religious practice conflicts with the law, <b>the law prevails</b>.`,
+        vi: `<b>Bốn quyền tự do chính.</b> <b>Ngôn luận/biểu đạt</b> — nói, viết, hoặc sáng tác nghệ thuật/phim/nhạc thể hiện quan điểm. <b>Hội họp/lập hội</b> — tự do gia nhập hoặc rời khỏi bất kỳ nhóm hợp pháp nào. <b>Tôn giáo</b> — Úc theo thể chế thế tục, không có tôn giáo chính thức; được tự do theo bất kỳ tôn giáo nào hoặc không theo. Trong mọi trường hợp, luật Úc luôn phải được tuân thủ, và khi tập tục tôn giáo mâu thuẫn với luật, <b>luật pháp luôn thắng</b>.`
+      },
+      {
+        en: `<b>Equality.</b> Men and women have equal rights; discrimination by gender is illegal. Australians value equal opportunity — a "fair go" — meaning success should come from talent, work and effort, not wealth or background.`,
+        vi: `<b>Bình đẳng.</b> Nam và nữ có quyền bình đẳng; phân biệt đối xử vì giới tính là phạm pháp. Người Úc coi trọng cơ hội bình đẳng — "a fair go" — nghĩa là thành công nên đến từ tài năng, công sức và nỗ lực, không phải từ giàu nghèo hay xuất thân.`
+      },
+      {
+        en: `<b>Citizen responsibilities (what you give):</b> obey the law · vote in federal, state/territory elections and referendums · defend Australia if needed · serve on a jury if called.`,
+        vi: `<b>Trách nhiệm công dân (điều bạn cống hiến):</b> tuân thủ luật pháp · đi bầu cử liên bang, tiểu bang/lãnh thổ và trưng cầu dân ý · bảo vệ nước Úc khi cần · làm bồi thẩm đoàn nếu được gọi.`
+      },
+      {
+        en: `<b>Citizen privileges (what Australia gives you):</b> vote · apply for children born overseas to become citizens by descent · apply for Australian Public Service or Defence Force jobs · seek election to parliament (if not a dual citizen) · apply for an Australian passport and re-enter freely · ask for consular help overseas.`,
+        vi: `<b>Đặc quyền công dân (điều nước Úc dành cho bạn):</b> quyền bầu cử · xin cho con sinh ở nước ngoài trở thành công dân theo huyết thống · xin việc trong Công vụ hoặc Quân đội Úc · ứng cử vào quốc hội (nếu không có hai quốc tịch) · xin hộ chiếu Úc và tự do nhập cảnh trở lại · nhờ trợ giúp lãnh sự khi ở nước ngoài.`
+      },
+      {
+        en: `<b>Paying tax</b> is required by law and funds healthcare, education, defence, roads and social security — collected by the Australian Taxation Office (ATO).`,
+        vi: `<b>Đóng thuế</b> là yêu cầu bắt buộc theo luật, dùng để tài trợ y tế, giáo dục, quốc phòng, đường xá và an sinh xã hội — do Sở Thuế Úc (ATO) thu.`
+      }
+    ],
+    keywords: [
+      ["Parliamentary democracy — power from the people","Dân chủ nghị viện — quyền lực từ dân"],
+      ["Rule of Law — no one above the law","Pháp quyền — không ai đứng trên luật"],
+      ["4 freedoms: speech, expression, association, religion","4 quyền tự do: ngôn luận, biểu đạt, hội họp, tôn giáo"],
+      ["Australian law always prevails over religious practice","Luật Úc luôn thắng tập tục tôn giáo"],
+      ["A 'fair go' — equal opportunity via effort, not wealth","'Fair go' — cơ hội bình đẳng qua nỗ lực, không phải giàu nghèo"],
+      ["Responsibilities: obey law, vote, defend, jury duty","Trách nhiệm: tuân luật, bầu cử, bảo vệ, bồi thẩm"],
+      ["Privileges: passport, APS/Defence jobs, election, consular help","Đặc quyền: hộ chiếu, việc APS/Quân đội, ứng cử, trợ giúp lãnh sự"],
+      ["Tax collected by the ATO","Thuế do ATO thu"]
+    ]
+  },
+
+  government: {
+    title: "Part 3: Government and the law in Australia",
+    titleVi: "Phần 3: Chính phủ và luật pháp ở Úc",
+    sections: [
+      {
+        en: `<b>Voting.</b> Citizens 18+ must enrol and vote in federal, state/territory elections and referendums — it's <b>compulsory</b>, done by <b>secret ballot</b>. The <b>Australian Electoral Commission (AEC)</b> runs elections and is independent of government. Not voting without a good reason can mean a fine.`,
+        vi: `<b>Bầu cử.</b> Công dân từ 18 tuổi phải ghi danh và đi bầu trong các cuộc bầu cử liên bang, tiểu bang/lãnh thổ và trưng cầu dân ý — đây là việc <b>bắt buộc</b>, bằng <b>phiếu kín</b>. <b>Uỷ ban Bầu cử Úc (AEC)</b> tổ chức bầu cử và độc lập với chính phủ. Không đi bầu mà không có lý do chính đáng có thể bị phạt tiền.`
+      },
+      {
+        img: "highCourt",
+        imgLabel: "Toà Thượng thẩm Úc / High Court of Australia",
+        en: `<b>Federation & the Constitution.</b> Before 1901, Australia was six separate self-governing British colonies. The <b>Australian Constitution</b> came into effect on 1 January 1901, establishing Parliament (House of Representatives + Senate) and the <b>High Court</b>, which has ultimate power to interpret the law. Changing the Constitution requires a referendum with a <b>double majority</b> — a majority of voters nationally AND a majority of voters in a majority of states.`,
+        vi: `<b>Liên bang & Hiến pháp.</b> Trước năm 1901, Úc gồm sáu thuộc địa tự trị riêng biệt của Anh. <b>Hiến pháp Úc</b> có hiệu lực từ 1/1/1901, lập ra Quốc hội (Hạ viện + Thượng viện) và <b>Toà Thượng thẩm</b> (High Court), có quyền tối cao giải thích luật. Sửa đổi Hiến pháp cần trưng cầu dân ý với <b>đa số kép</b> — đa số cử tri toàn quốc VÀ đa số cử tri ở đa số các bang.`
+      },
+      {
+        en: `<b>Three powers.</b> <b>Legislative</b> (Parliament makes/changes laws) · <b>Executive</b> (PM, ministers, Governor-General put laws into practice) · <b>Judicial</b> (independent courts/judges interpret and apply the law). This separation stops any one person or group holding all the power.`,
+        vi: `<b>Ba quyền lực.</b> <b>Lập pháp</b> (Quốc hội làm/sửa luật) · <b>Hành pháp</b> (Thủ tướng, bộ trưởng, Toàn quyền thi hành luật) · <b>Tư pháp</b> (toà án/thẩm phán độc lập giải thích và áp dụng luật). Sự phân chia này ngăn một cá nhân hay nhóm nắm hết quyền lực.`
+      },
+      {
+        img: "crown",
+        imgLabel: "Biểu tượng Vương quyền / Crown (symbolic)",
+        en: `<b>Head of State.</b> <b>King Charles III</b> is Australia's Head of State (a constitutional monarchy). The <b>Governor-General</b> is his representative in Australia, appointed on the PM's advice, and acts independently of political parties. Each state has a <b>Governor</b> in a similar role. The <b>Prime Minister</b> leads the Australian Government.`,
+        vi: `<b>Nguyên thủ quốc gia.</b> <b>Vua Charles III</b> là Nguyên thủ quốc gia của Úc (Úc là quân chủ lập hiến). <b>Toàn quyền</b> (Governor-General) là đại diện của Vua tại Úc, được bổ nhiệm theo đề nghị của Thủ tướng, và hoạt động độc lập với các đảng phái. Mỗi bang có một <b>Thống đốc</b> (Governor) với vai trò tương tự. <b>Thủ tướng</b> lãnh đạo Chính phủ Úc.`
+      },
+      {
+        img: "parliamentHouse",
+        imgLabel: "Toà nhà Quốc hội, Canberra / Parliament House",
+        en: `<b>Parliament's two houses.</b> The <b>House of Representatives</b> ("People's House") has 150+ MPs elected by electorate population. The <b>Senate</b> ("States' House") has 76 senators — 12 per state, 2 per territory — with all states equally represented regardless of size.`,
+        vi: `<b>Hai viện của Quốc hội.</b> <b>Hạ viện</b> ("Viện của Dân") có hơn 150 nghị sĩ, số ghế theo dân số từng khu vực. <b>Thượng viện</b> ("Viện của các Bang") có 76 thượng nghị sĩ — mỗi bang 12, mỗi lãnh thổ 2 — các bang có số ghế bằng nhau bất kể diện tích hay dân số.`
+      },
+      {
+        en: `<b>Three levels of government.</b> <b>Federal</b> — defence, immigration, tax, foreign affairs. <b>State/territory</b> — hospitals, schools, roads, police. <b>Local (councils)</b> — rubbish collection, local roads, parks, building permits.`,
+        vi: `<b>Ba cấp chính quyền.</b> <b>Liên bang</b> — quốc phòng, nhập cư, thuế, ngoại giao. <b>Tiểu bang/lãnh thổ</b> — bệnh viện, trường học, đường xá, cảnh sát. <b>Địa phương (hội đồng)</b> — thu rác, đường địa phương, công viên, giấy phép xây dựng.`
+      },
+      {
+        en: `<b>How a law is made.</b> A proposal (a <b>Bill</b>) is debated and voted on by both Houses. If passed by a majority in each House, the <b>Governor-General signs it into law</b> — this is called <b>Royal Assent</b>.`,
+        vi: `<b>Cách một đạo luật ra đời.</b> Một đề xuất (gọi là <b>Bill</b>) được cả hai viện tranh luận và biểu quyết. Nếu được đa số thông qua ở cả hai viện, <b>Toàn quyền ký ban hành thành luật</b> — gọi là <b>Royal Assent</b>.`
+      },
+      {
+        en: `<b>Enforcing the law.</b> <b>Courts</b> are independent and decide guilt/penalty based on evidence. <b>Judges/magistrates</b> are independent — government cannot remove them for disagreeing with a ruling. A <b>jury</b> of ordinary citizens decides guilty/not guilty in some trials; people are innocent until proven guilty. <b>Police</b> maintain order and are independent of government; the <b>Australian Federal Police (AFP)</b> investigates crimes against federal law. Bribing police is a serious crime.`,
+        vi: `<b>Thực thi pháp luật.</b> <b>Toà án</b> độc lập, quyết định có tội/hình phạt dựa trên bằng chứng. <b>Thẩm phán</b> độc lập — chính phủ không thể sa thải họ vì bất đồng với phán quyết. <b>Bồi thẩm đoàn</b> gồm công dân bình thường quyết định có tội hay vô tội trong một số phiên toà; mọi người được coi là vô tội cho đến khi bị chứng minh có tội. <b>Cảnh sát</b> giữ trật tự và độc lập với chính phủ; <b>Cảnh sát Liên bang Úc (AFP)</b> điều tra tội phạm vi phạm luật liên bang. Hối lộ cảnh sát là tội nghiêm trọng.`
+      }
+    ],
+    keywords: [
+      ["Voting — compulsory, secret ballot","Bầu cử — bắt buộc, phiếu kín"],
+      ["AEC — independent election body","AEC — cơ quan bầu cử độc lập"],
+      ["Constitution — effect from 1 Jan 1901","Hiến pháp — hiệu lực từ 1/1/1901"],
+      ["Referendum — needs double majority","Trưng cầu dân ý — cần đa số kép"],
+      ["3 powers: legislative, executive, judicial","3 quyền: lập pháp, hành pháp, tư pháp"],
+      ["Head of State — King Charles III","Nguyên thủ — Vua Charles III"],
+      ["Governor-General — King's representative","Toàn quyền — đại diện của Vua"],
+      ["House of Reps (150+) & Senate (76)","Hạ viện (150+) & Thượng viện (76)"],
+      ["Bill → Royal Assent = law","Bill → Royal Assent = thành luật"],
+      ["Innocent until proven guilty","Vô tội cho đến khi bị chứng minh có tội"],
+      ["AFP — federal crimes","AFP — tội phạm liên bang"]
+    ]
+  },
+
+  values: {
+    title: "Part 4: Australian values (5/5 required)",
+    titleVi: "Phần 4: Giá trị Úc (bắt buộc đúng 5/5)",
+    sections: [
+      {
+        en: `<b>Core values.</b> Australian values are based on <b>freedom, respect, fairness, and equality of opportunity</b>. Living out these values in everyday life is central to citizenship.`,
+        vi: `<b>Giá trị cốt lõi.</b> Giá trị của Úc dựa trên <b>tự do, tôn trọng, công bằng, và bình đẳng về cơ hội</b>. Sống theo những giá trị này trong đời sống hằng ngày là cốt lõi của việc trở thành công dân.`
+      },
+      {
+        en: `<b>Rule of Law.</b> Everyone is equal under the law; no one is above it. You should follow the law even if no one is watching, and this applies to everyone in Australia regardless of background or culture.`,
+        vi: `<b>Pháp quyền.</b> Mọi người đều bình đẳng trước pháp luật; không ai đứng trên luật. Bạn nên tuân thủ luật ngay cả khi không ai chứng kiến, và điều này áp dụng cho MỌI người ở Úc, bất kể xuất thân hay văn hoá.`
+      },
+      {
+        en: `<b>Golden rule for values questions:</b> whenever a personal, cultural, or religious practice conflicts with Australian law — <b>Australian law always wins</b>. And <b>violence is never an acceptable</b> way to resolve a disagreement.`,
+        vi: `<b>Quy tắc vàng cho câu hỏi về Values:</b> khi một tập tục cá nhân, văn hoá, hoặc tôn giáo mâu thuẫn với luật Úc — <b>luật Úc luôn thắng</b>. Và <b>bạo lực không bao giờ được chấp nhận</b> như một cách giải quyết mâu thuẫn.`
+      },
+      {
+        en: `<b>Religion and law.</b> Religious laws have <b>no legal status</b> in Australia. Practices like <b>polygamy</b> (marrying more than one person) and <b>forced marriage</b> are illegal and can lead to imprisonment. Religious intolerance has no place in Australian society.`,
+        vi: `<b>Tôn giáo và luật pháp.</b> Luật tôn giáo <b>không có giá trị pháp lý</b> ở Úc. Các tập tục như <b>đa thê</b> (kết hôn với nhiều người) và <b>hôn nhân ép buộc</b> đều phạm pháp và có thể bị phạt tù. Sự thiếu khoan dung tôn giáo không có chỗ đứng trong xã hội Úc.`
+      },
+      {
+        en: `<b>Equality under the law.</b> Equal rights regardless of gender, sexual orientation, age, disability, religion, race, or origin. Same-sex marriage is legal. Divorce is acceptable for either spouse. <b>Physical violence against a partner is always a criminal offence</b> — never acceptable.`,
+        vi: `<b>Bình đẳng trước pháp luật.</b> Quyền bình đẳng bất kể giới tính, xu hướng tính dục, tuổi tác, khuyết tật, tôn giáo, chủng tộc, hay nguồn gốc. Hôn nhân đồng giới hợp pháp. Ly hôn được chấp nhận với cả hai bên vợ chồng. <b>Bạo lực thể chất với bạn đời luôn là tội hình sự</b> — không bao giờ được chấp nhận.`
+      },
+      {
+        en: `<b>A "fair go".</b> Success should come from <b>hard work and talent</b>, not wealth, gender, or ethnicity. When filling a job, the law supports choosing the person with the best skills and experience.`,
+        vi: `<b>"A fair go".</b> Thành công nên đến từ <b>nỗ lực và tài năng</b>, không phải giàu nghèo, giới tính, hay sắc tộc. Khi tuyển dụng, luật ủng hộ việc chọn người có kỹ năng và kinh nghiệm tốt nhất.`
+      },
+      {
+        en: `<b>Mutual respect and tolerance.</b> Respect others' freedom, dignity, opinions, and choices — even when you disagree. <b>Violence of any kind (verbal or physical) is illegal.</b> The age of sexual consent is 16 or 17 depending on the state/territory. <b>Racism has no place in Australia</b> — online or in person.`,
+        vi: `<b>Tôn trọng và khoan dung lẫn nhau.</b> Tôn trọng tự do, phẩm giá, ý kiến, và lựa chọn của người khác — kể cả khi bạn không đồng ý. <b>Bạo lực dưới mọi hình thức (lời nói hay thể chất) đều là phạm pháp.</b> Tuổi đồng thuận tình dục là 16 hoặc 17 tuỳ bang/lãnh thổ. <b>Phân biệt chủng tộc không có chỗ ở Úc</b> — dù trên mạng hay ngoài đời.`
+      },
+      {
+        en: `<b>Mateship.</b> Helping and receiving help from others, especially in hard times — e.g. taking a meal to an elderly neighbour, or driving a friend to an appointment. Volunteering is a strong Australian tradition.`,
+        vi: `<b>Mateship (tình đồng chí, giúp đỡ lẫn nhau).</b> Giúp đỡ và nhận sự giúp đỡ từ người khác, đặc biệt lúc khó khăn — ví dụ mang bữa ăn cho hàng xóm lớn tuổi, hoặc chở bạn đi khám bệnh. Làm tình nguyện là một truyền thống mạnh mẽ của người Úc.`
+      },
+      {
+        en: `<b>English language.</b> English is valued as the national, unifying language. Citizenship applicants must make reasonable efforts to learn English if it is not their native language — it helps with education, employment, and integration.`,
+        vi: `<b>Ngôn ngữ tiếng Anh.</b> Tiếng Anh được coi trọng là ngôn ngữ quốc gia, gắn kết mọi người. Người xin nhập tịch phải nỗ lực hợp lý để học tiếng Anh nếu đó không phải tiếng mẹ đẻ — giúp ích cho học hành, việc làm, và hoà nhập.`
+      },
+      {
+        en: `<b>Keeping society safe.</b> Report a friend/neighbour suspected of planning a serious crime, or knowledge of child abuse, to authorities. <b>Cyber abuse</b> (sharing intimate images without consent, online stalking, racist abuse online) is often illegal.`,
+        vi: `<b>Giữ an toàn cho xã hội.</b> Báo cho cơ quan chức năng nếu nghi ngờ bạn/hàng xóm chuẩn bị phạm tội nghiêm trọng, hoặc biết về việc trẻ em bị lạm dụng. <b>Lạm dụng qua mạng</b> (chia sẻ ảnh riêng tư không xin phép, theo dõi online, phân biệt chủng tộc trên mạng) thường là phạm pháp.`
+      },
+      {
+        en: `<b>Loyalty to Australia.</b> Dual/multiple citizenship is allowed, but an Australian citizen must always follow Australian law while in Australia — and some laws apply even overseas (e.g. it is illegal for Australians to have any sexual activity with a child under 16, anywhere).`,
+        vi: `<b>Trung thành với nước Úc.</b> Được phép giữ hai/nhiều quốc tịch, nhưng công dân Úc khi ở Úc luôn phải tuân theo luật Úc — và một số luật áp dụng ngay cả ở nước ngoài (ví dụ: người Úc tuyệt đối không được có hoạt động tình dục với trẻ dưới 16 tuổi, ở bất kỳ đâu).`
+      }
+    ],
+    keywords: [
+      ["Core values: freedom, respect, fairness, equal opportunity","Giá trị cốt lõi: tự do, tôn trọng, công bằng, bình đẳng cơ hội"],
+      ["GOLDEN RULE: Australian law always beats religious/cultural practice","QUY TẮC VÀNG: luật Úc luôn thắng tập tục tôn giáo/văn hoá"],
+      ["GOLDEN RULE: violence is never acceptable","QUY TẮC VÀNG: bạo lực không bao giờ được chấp nhận"],
+      ["Polygamy & forced marriage = illegal","Đa thê & hôn nhân ép buộc = phạm pháp"],
+      ["Same-sex marriage = legal","Hôn nhân đồng giới = hợp pháp"],
+      ["Domestic violence = always a criminal offence","Bạo hành gia đình = luôn là tội hình sự"],
+      ["'A fair go' = success from effort, not wealth","'Fair go' = thành công từ nỗ lực, không phải tiền bạc"],
+      ["Age of consent = 16 or 17 (varies by state)","Tuổi đồng thuận = 16 hoặc 17 (tuỳ bang)"],
+      ["Racism has no place in Australia","Phân biệt chủng tộc không có chỗ ở Úc"],
+      ["Mateship = helping others in hard times","Mateship = giúp đỡ nhau lúc khó khăn"],
+      ["Must make effort to learn English","Phải nỗ lực học tiếng Anh"],
+      ["Dual citizenship OK, but Australian law always applies in Australia","Hai quốc tịch OK, nhưng luật Úc luôn áp dụng khi ở Úc"]
+    ]
+  }
+};
+
+const QUESTIONS = JSON.parse(document.getElementById('qdata').textContent);
+const CATS = {
+  people:{en:"Australia & its people",vi:"Nước Úc & con người"},
+  rights:{en:"Democratic beliefs & rights",vi:"Niềm tin dân chủ & quyền"},
+  government:{en:"Government & the law",vi:"Chính phủ & luật pháp"},
+  values:{en:"Australian values",vi:"Giá trị Úc (bắt buộc 5/5)"}
+};
+QUESTIONS.forEach((q,i)=>q.id=i);
+
+// ---- persistent progress (in-memory; falls back gracefully) ----
+const store = (()=>{
+  let mem = {seen:{}, correct:{}, bestExam:null, examCount:0};
+  return {
+    get:()=>mem,
+    save:(o)=>{mem=o;},
+    reset:()=>{mem={seen:{},correct:{},bestExam:null,examCount:0};}
+  };
+})();
+
+const app = document.getElementById('app');
+let session = null;
+
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function pick(arr,n){return shuffle(arr).slice(0,n);}
+function catCount(c){return QUESTIONS.filter(q=>q.cat===c).length;}
+function masteredCount(c){const m=store.get();return QUESTIONS.filter(q=>q.cat===c && m.correct[q.id]).length;}
+
+// =================== HOME ===================
+function home(){
+  session=null;
+  readQueuePlaying=false;
+  if('speechSynthesis' in window) window.speechSynthesis.cancel();
+  const m=store.get();
+  const totalSeen=Object.keys(m.seen).length;
+  const totalMastered=Object.keys(m.correct).length;
+  let catCards='';
+  for(const c in CATS){
+    const done=masteredCount(c), tot=catCount(c);
+    const pct=Math.round(done/tot*100);
+    catCards+=`<button class="btn ${c==='values'?'':'alt'}" onclick="startPractice('${c}')" style="${c==='values'?'background:#c9a227':''}">
+      ${CATS[c].vi}
+      <span class="k">${CATS[c].en} · ${tot} câu · đã thuộc ${done}/${tot} (${pct}%)</span>
+    </button>`;
+  }
+  app.innerHTML=`
+  <div class="card">
+    <h2>📖 Học bài (Giảng bài song ngữ)</h2>
+    <p class="lead">Đọc nội dung Anh–Việt trước khi luyện quiz. Cuối mỗi phần có tóm tắt từ khoá cần nhớ.</p>
+    <button class="btn ghost" onclick="showLesson('people')">Phần 1 — Nước Úc & con người</button>
+    <button class="btn ghost" onclick="showLesson('rights')">Phần 2 — Niềm tin dân chủ & quyền</button>
+    <button class="btn ghost" onclick="showLesson('government')">Phần 3 — Chính phủ & luật pháp</button>
+    <button class="btn ghost" onclick="showLesson('values')" style="border-color:#c9a227;color:#8a6d12">Phần 4 — Giá trị Úc ★ (quan trọng nhất)</button>
+  </div>
+  <div class="card">
+    <h2>Chọn chế độ luyện tập</h2>
+    <button class="btn" onclick="startExam()">📝 Thi thử (Mock Test)
+      <span class="k">20 câu · 45 phút · giống đề thật · cần 15/20 và 5/5 Values</span></button>
+    <div class="grid2" style="margin-top:9px">
+      <button class="btn ghost sm" onclick="startQuick()">⚡ Nhanh 10 câu<span class="k">ngẫu nhiên</span></button>
+      <button class="btn ghost sm" onclick="startValues()">⭐ Chỉ Values<span class="k">luyện phần bắt buộc</span></button>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Ôn theo từng phần</h2>
+    <p class="lead">Học từng chủ đề, có giải thích tiếng Việt sau mỗi câu.</p>
+    ${catCards}
+  </div>
+  <div class="card">
+    <h2>Tiến độ của bạn</h2>
+    <div class="stat"><span>Tổng số câu đã làm</span><b>${totalSeen} / ${QUESTIONS.length}</b></div>
+    <div class="bar"><i style="width:${totalSeen/QUESTIONS.length*100}%"></i></div>
+    <div class="stat"><span>Số câu đã trả lời đúng (thuộc)</span><b>${totalMastered} / ${QUESTIONS.length}</b></div>
+    <div class="bar"><i style="width:${totalMastered/QUESTIONS.length*100}%;background:#c9a227"></i></div>
+    <div class="stat" style="margin-top:8px"><span>Số lần thi thử</span><b>${m.examCount}</b></div>
+    <div class="stat"><span>Điểm thi thử cao nhất</span><b>${m.bestExam!=null?m.bestExam+'/20':'—'}</b></div>
+    <button class="reset" onclick="if(confirm('Xoá toàn bộ tiến độ?')){store.reset();home();}">Xoá tiến độ</button>
+  </div>`;
+}
+
+function stripHtml(html){
+  const tmp=document.createElement('div');
+  tmp.innerHTML=html;
+  return tmp.textContent||tmp.innerText||'';
+}
+
+let currentUtterance=null;
+function speakText(text, lang, btnEl){
+  if(!('speechSynthesis' in window)){
+    alert('Trình duyệt này không hỗ trợ đọc giọng nói (text-to-speech).');
+    return;
+  }
+  // toggle: if this button is already speaking, stop it
+  if(btnEl && btnEl.dataset.playing==='1'){
+    window.speechSynthesis.cancel();
+    resetAllAudioBtns();
+    return;
+  }
+  window.speechSynthesis.cancel();
+  resetAllAudioBtns();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = lang;
+  utter.rate = 0.95;
+  currentUtterance = utter;
+  if(btnEl){
+    btnEl.dataset.playing='1';
+    btnEl.classList.add('playing');
+    btnEl.textContent = '⏸';
+  }
+  utter.onend = utter.onerror = ()=>resetAllAudioBtns();
+  window.speechSynthesis.speak(utter);
+}
+function resetAllAudioBtns(){
+  document.querySelectorAll('.audioBtn').forEach(b=>{
+    b.dataset.playing='0';
+    b.classList.remove('playing');
+    b.textContent = b.dataset.label || '🔊';
+  });
+}
+
+function toggleImg(id){
+  const el=document.getElementById(id);
+  const btn=document.getElementById(id+'-btn');
+  if(!el)return;
+  const open = el.style.display==='block';
+  el.style.display = open?'none':'block';
+  if(btn)btn.textContent = (open?'🖼 Xem hình minh hoạ':'▲ Ẩn hình minh hoạ');
+}
+
+function renderMedia(imgData){
+  // imgData is an entry from IMAGES: either {type:'svg', svg} or {type:'external', src, alt, credit, creditUrl}
+  if(!imgData) return '';
+  if(imgData.type === 'external'){
+    return `<img src="${imgData.src}" alt="${imgData.alt||''}" loading="lazy" style="max-width:180px;max-height:130px;width:100%;height:auto"
+        onerror="this.onerror=null;this.replaceWith(Object.assign(document.createElement('div'),{className:'imgFallback',textContent:'⚠ Không tải được ảnh (cần internet)'}));">`;
+  }
+  return imgData.svg || '';
+}
+function renderCredit(imgData){
+  if(imgData && imgData.type==='external' && imgData.credit){
+    return `<div class="imgCredit">Nguồn: <a href="${imgData.creditUrl}" target="_blank" rel="noopener">${imgData.credit}</a></div>`;
+  }
+  return '';
+}
+
+function renderImgBlock(sec, idx, lessonKey){
+  if(sec.img){
+    const id=`img-${lessonKey}-${idx}`;
+    const imgData = IMAGES[sec.img];
+    return `<button class="imgToggle" id="${id}-btn" onclick="toggleImg('${id}')">🖼 Xem hình minh hoạ</button>
+      <div class="imgBox" id="${id}" style="display:none">
+        <div class="imgSingle">${renderMedia(imgData)}</div>
+        <div class="imgCap">${sec.imgLabel||''}</div>
+        ${renderCredit(imgData)}
+      </div>`;
+  }
+  if(sec.imgRow){
+    const id=`img-${lessonKey}-${idx}`;
+    let items = sec.imgRow.map(it=>{
+      const imgData = IMAGES[it.img];
+      return `<div class="imgItem">${renderMedia(imgData)}<div class="imgCap">${it.label}</div>${renderCredit(imgData)}</div>`;
+    }).join('');
+    return `<button class="imgToggle" id="${id}-btn" onclick="toggleImg('${id}')">🖼 Xem hình minh hoạ</button>
+      <div class="imgBox imgGrid" id="${id}" style="display:none">${items}</div>`;
+  }
+  return '';
+}
+
+// =================== FULL-SECTION READ (queue-based) ===================
+let readQueue = [];
+let readQueueIdx = 0;
+let readQueuePlaying = false;
+
+function buildReadQueue(key, mode){
+  // mode: 'both' (EN then VI per paragraph), 'en' (English only), 'vi' (Vietnamese only)
+  const L = LESSONS[key];
+  const q = [];
+  L.sections.forEach(s=>{
+    const en = stripHtml(s.en), vi = stripHtml(s.vi);
+    if(mode==='both'){ q.push({text:en,lang:'en-AU'}); q.push({text:vi,lang:'vi-VN'}); }
+    else if(mode==='en'){ q.push({text:en,lang:'en-AU'}); }
+    else if(mode==='vi'){ q.push({text:vi,lang:'vi-VN'}); }
+  });
+  return q;
+}
+
+function playReadQueue(){
+  if(readQueueIdx >= readQueue.length){
+    stopReadAll();
+    return;
+  }
+  const item = readQueue[readQueueIdx];
+  const utter = new SpeechSynthesisUtterance(item.text);
+  utter.lang = item.lang;
+  utter.rate = 0.95;
+  utter.onend = ()=>{
+    if(!readQueuePlaying)return; // stopped by user
+    readQueueIdx++;
+    updateReadProgress();
+    playReadQueue();
+  };
+  utter.onerror = ()=>{ if(readQueuePlaying){ readQueueIdx++; playReadQueue(); } };
+  window.speechSynthesis.speak(utter);
+}
+
+function updateReadProgress(){
+  const bar = document.getElementById('readProgressBar');
+  const lbl = document.getElementById('readProgressLbl');
+  if(bar) bar.style.width = Math.round(readQueueIdx/readQueue.length*100)+'%';
+  if(lbl) lbl.textContent = `Đang đọc: ${Math.min(readQueueIdx+1,readQueue.length)}/${readQueue.length}`;
+}
+
+function startReadAll(key, mode){
+  if(!('speechSynthesis' in window)){
+    alert('Trình duyệt này không hỗ trợ đọc giọng nói (text-to-speech).');
+    return;
+  }
+  resetAllAudioBtns();
+  window.speechSynthesis.cancel();
+  readQueue = buildReadQueue(key, mode);
+  readQueueIdx = 0;
+  readQueuePlaying = true;
+  renderReadAllControls(key, mode, true);
+  playReadQueue();
+}
+
+function pauseResumeReadAll(){
+  if(!readQueuePlaying)return;
+  if(window.speechSynthesis.speaking && !window.speechSynthesis.paused){
+    window.speechSynthesis.pause();
+    const btn=document.getElementById('readPauseBtn');
+    if(btn)btn.textContent='▶ Tiếp tục';
+  }else if(window.speechSynthesis.paused){
+    window.speechSynthesis.resume();
+    const btn=document.getElementById('readPauseBtn');
+    if(btn)btn.textContent='⏸ Tạm dừng';
+  }
+}
+
+function stopReadAll(){
+  readQueuePlaying = false;
+  readQueue = [];
+  readQueueIdx = 0;
+  window.speechSynthesis.cancel();
+  const panel = document.getElementById('readAllPanel');
+  if(panel) panel.innerHTML = renderReadAllButtons(window.currentLessonKey);
+}
+
+function renderReadAllButtons(key){
+  return `
+    <div class="readModeRow">
+      <button class="btn sm" onclick="startReadAll('${key}','both')">🔊 Đọc toàn bộ (Anh + Việt)</button>
+    </div>
+    <div class="grid2" style="margin-top:8px">
+      <button class="btn ghost sm" onclick="startReadAll('${key}','en')">🇬🇧 Chỉ tiếng Anh</button>
+      <button class="btn ghost sm" onclick="startReadAll('${key}','vi')">🇻🇳 Chỉ tiếng Việt</button>
+    </div>`;
+}
+
+function renderReadAllControls(key, mode, playing){
+  const panel = document.getElementById('readAllPanel');
+  if(!panel)return;
+  if(!playing){ panel.innerHTML = renderReadAllButtons(key); return; }
+  const modeLabel = mode==='both'?'Anh + Việt':(mode==='en'?'Tiếng Anh':'Tiếng Việt');
+  panel.innerHTML = `
+    <div class="readingNow">
+      <div class="small" style="margin:0 0 6px;text-align:left">▶ Đang đọc toàn bộ phần (${modeLabel})</div>
+      <div class="bar"><i id="readProgressBar" style="width:0%;background:#c9a227"></i></div>
+      <div class="small" id="readProgressLbl" style="text-align:left;margin:4px 0 10px">Đang đọc: 1/${readQueue.length}</div>
+      <div class="grid2">
+        <button class="btn ghost sm" id="readPauseBtn" onclick="pauseResumeReadAll()">⏸ Tạm dừng</button>
+        <button class="btn ghost sm" style="color:#c0392b;border-color:#c0392b" onclick="stopReadAll()">■ Dừng hẳn</button>
+      </div>
+    </div>`;
+}
+
+// =================== MIND MAP (interactive hierarchy) ===================
+let mmCounter = 0;
+function renderMindNode(node, depth){
+  const hasChildren = node.children && node.children.length;
+  const id = 'mm-' + (mmCounter++);
+  if(depth === 0){
+    // root
+    let kids = node.children.map(c=>renderMindNode(c,1)).join('');
+    return `<div class="mm-root">
+      <div class="mm-rootNode"><span class="mm-en">${node.en}</span><span class="mm-vi">${node.vi}</span></div>
+      <div class="mm-branches">${kids}</div>
+    </div>`;
+  }
+  if(depth === 1){
+    // main branch — collapsible
+    let kids = hasChildren ? node.children.map(c=>renderMindNode(c,2)).join('') : '';
+    return `<div class="mm-branch">
+      <button class="mm-b1" onclick="mmToggle('${id}')">
+        <span class="mm-caret" id="${id}-c">▾</span>
+        <span class="mm-btxt"><span class="mm-en">${node.en}</span><span class="mm-vi">${node.vi}</span></span>
+      </button>
+      <div class="mm-children" id="${id}">${kids}</div>
+    </div>`;
+  }
+  // leaf (depth 2)
+  return `<div class="mm-leaf"><span class="mm-en">${node.en}</span><span class="mm-vi">${node.vi}</span></div>`;
+}
+
+function mmToggle(id){
+  const el = document.getElementById(id);
+  const caret = document.getElementById(id+'-c');
+  if(!el) return;
+  const collapsed = el.classList.toggle('collapsed');
+  if(caret) caret.textContent = collapsed ? '▸' : '▾';
+}
+function mmExpandAll(key, expand){
+  document.querySelectorAll('#mindmap-'+key+' .mm-children').forEach(el=>{
+    el.classList.toggle('collapsed', !expand);
+    const caret = document.getElementById(el.id+'-c');
+    if(caret) caret.textContent = expand ? '▾' : '▸';
+  });
+}
+
+function renderMindMap(key){
+  mmCounter = 0;
+  const tree = MINDMAPS[key];
+  if(!tree) return '';
+  return `<div class="mm-controls">
+      <button class="mm-ctrl" onclick="mmExpandAll('${key}',true)">⊕ Mở tất cả</button>
+      <button class="mm-ctrl" onclick="mmExpandAll('${key}',false)">⊖ Gập tất cả</button>
+    </div>
+    <div class="mindmap" id="mindmap-${key}">${renderMindNode(tree,0)}</div>`;
+}
+
+
+function showLesson(key){
+  window.currentLessonKey = key;
+  stopReadAll();
+  const L = LESSONS[key];
+  let secHtml='';
+  L.sections.forEach((s,i)=>{
+    const enId=`en-${key}-${i}`, viId=`vi-${key}-${i}`;
+    const enText = stripHtml(s.en).replace(/"/g,'&quot;');
+    const viText = stripHtml(s.vi).replace(/"/g,'&quot;');
+    secHtml += `<div class="lesson-sec">
+      <div class="lesson-en">
+        ${s.en}
+        <button class="audioBtn" id="${enId}" title="Nghe tiếng Anh" data-label="🔊" data-playing="0" data-text="${enText}" data-lang="en-AU" onclick="speakText(this.dataset.text,this.dataset.lang,this)">🔊</button>
+      </div>
+      ${renderImgBlock(s, i, key)}
+      <div class="lesson-vi">
+        ${s.vi}
+        <button class="audioBtn" id="${viId}" title="Nghe tiếng Việt" data-label="🔊" data-playing="0" data-text="${viText}" data-lang="vi-VN" onclick="speakText(this.dataset.text,this.dataset.lang,this)">🔊</button>
+      </div>
+    </div>`;
+  });
+  let kwHtml='';
+  L.keywords.forEach(([en,vi])=>{
+    kwHtml += `<div class="kwrow"><span class="kw-en">${en}</span><span class="kw-vi">${vi}</span></div>`;
+  });
+  app.innerHTML = `
+  <div class="card">
+    <button class="exitBtn" onclick="goHomeFromLesson()" style="margin-bottom:10px">‹ Về trang chính</button>
+    <h2>${L.titleVi}</h2>
+    <p class="lead" style="opacity:.75;margin-top:-8px">${L.title}</p>
+    <div class="readAllCard" id="readAllPanel">${renderReadAllButtons(key)}</div>
+    <p class="small" style="text-align:left;margin:12px 0 10px">💡 Bấm 🔊 để nghe từng đoạn riêng, bấm 🖼 để xem hình minh hoạ (nếu có).</p>
+    ${secHtml}
+  </div>
+  <div class="card kwcard">
+    <h2>🔑 Tóm tắt từ khoá cần nhớ</h2>
+    ${kwHtml}
+  </div>
+  <div class="card">
+    <h2>🧠 Sơ đồ tư duy (Mind map)</h2>
+    <div class="mindmapBox">${renderMindMap(key)}</div>
+  </div>
+  <div class="card" style="text-align:center">
+    <button class="btn" onclick="stopReadAll();startPractice('${key}')">Luyện quiz phần này ›</button>
+    <button class="btn ghost" onclick="goHomeFromLesson()">‹ Về trang chính</button>
+  </div>`;
+  window.scrollTo(0,0);
+}
+
+function goHomeFromLesson(){
+  stopReadAll();
+  home();
+}
+
+
+function startExam(){
+  // 20 questions: 5 values (mandatory) + 15 from others, mimic real test
+  const values=pick(QUESTIONS.filter(q=>q.cat==='values'),5);
+  const others=pick(QUESTIONS.filter(q=>q.cat!=='values'),15);
+  const qs=shuffle(values.concat(others));
+  session={mode:'exam',qs,i:0,answers:{},timeLeft:45*60,startedTimer:false};
+  runQuestion();
+  startTimer();
+}
+function startQuick(){
+  const qs=pick(QUESTIONS,10);
+  session={mode:'practice',qs,i:0,answers:{}};
+  runQuestion();
+}
+function startValues(){
+  const qs=pick(QUESTIONS.filter(q=>q.cat==='values'),Math.min(15,catCount('values')));
+  session={mode:'practice',qs,i:0,answers:{},title:'⭐ Values'};
+  runQuestion();
+}
+function startPractice(cat){
+  const qs=pick(QUESTIONS.filter(q=>q.cat===cat),QUESTIONS.filter(q=>q.cat===cat).length);
+  session={mode:'practice',qs,i:0,answers:{},title:CATS[cat].vi,cat};
+  runQuestion();
+}
+
+// =================== TIMER (exam) ===================
+let timerHandle=null;
+function startTimer(){
+  clearInterval(timerHandle);
+  timerHandle=setInterval(()=>{
+    if(!session||session.mode!=='exam'){clearInterval(timerHandle);return;}
+    session.timeLeft--;
+    const el=document.getElementById('timer');
+    if(el){
+      const mm=Math.floor(session.timeLeft/60), ss=session.timeLeft%60;
+      el.textContent=`${mm}:${ss<10?'0':''}${ss}`;
+      el.className='timer'+(session.timeLeft<=120?' warn':'');
+    }
+    if(session.timeLeft<=0){clearInterval(timerHandle);finishExam();}
+  },1000);
+}
+
+// =================== RENDER QUESTION ===================
+function runQuestion(){
+  const s=session, q=s.qs[s.i];
+  const answered=s.answers[q.id]!==undefined;
+  const isExam=s.mode==='exam';
+  const catLabel=CATS[q.cat].en;
+  let optsHtml='';
+  q.options.forEach((opt,idx)=>{
+    let cls='opt';
+    if(answered){
+      if(idx===q.answer)cls+=' correct';
+      else if(idx===s.answers[q.id])cls+=' wrong';
+      else cls+=' dim';
+    }
+    optsHtml+=`<button class="${cls}" ${answered?'disabled':''} onclick="answer(${idx})">
+      <span class="lab">${String.fromCharCode(65+idx)}</span>${opt}</button>`;
+  });
+
+  let expHtml='';
+  if(answered && !isExam){
+    const correct=s.answers[q.id]===q.answer;
+    expHtml=`<div class="exp show ${correct?'':'bad'}">
+      <span class="tag">${correct?'✓ Đúng — Giải thích':'✗ Chưa đúng — Giải thích'}</span>
+      ${q.exp}</div>`;
+  }
+
+  const timerBar=isExam?`<span class="timer" id="timer">45:00</span>`:`<span>${s.title||'Luyện tập'}</span>`;
+  const isLast=s.i===s.qs.length-1;
+  const allAnswered=s.qs.every(qq=>s.answers[qq.id]!==undefined);
+
+  let nav='';
+  if(isExam){
+    nav=`<div class="navrow">
+      ${s.i>0?`<button class="btn ghost sm" onclick="go(-1)">‹ Trước</button>`:''}
+      ${!isLast?`<button class="btn sm" onclick="go(1)">Sau ›</button>`:
+        `<button class="btn sm" onclick="finishExam()" style="background:#c9a227">Nộp bài</button>`}
+    </div>
+    <p class="small">Đã trả lời ${Object.keys(s.answers).length}/20 · có thể bỏ qua và quay lại</p>`;
+  }else{
+    if(answered){
+      nav=`<div class="navrow">
+        ${!isLast?`<button class="btn sm" onclick="go(1)">Câu tiếp ›</button>`:
+          `<button class="btn sm" onclick="finishPractice()">Xem kết quả</button>`}
+      </div>`;
+    }else{
+      nav=`<p class="small">Chọn một đáp án để xem giải thích</p>`;
+    }
+  }
+
+  app.innerHTML=`
+  <div class="card">
+    <div class="qmeta">
+      <button class="exitBtn" onclick="exitQuiz()">✕ Thoát</button>
+      <span style="display:flex;gap:8px;align-items:center">${timerBar}<span>· Câu ${s.i+1}/${s.qs.length}</span></span>
+    </div>
+    <span class="pill ${q.cat==='values'?'values':''}">${catLabel}${q.cat==='values'?' ★':''}</span>
+    <div class="qtext">${q.q}</div>
+    ${optsHtml}
+    ${expHtml}
+    ${nav}
+  </div>`;
+  window.scrollTo(0,0);
+}
+
+function answer(idx){
+  const s=session,q=s.qs[s.i];
+  if(s.answers[q.id]!==undefined)return;
+  s.answers[q.id]=idx;
+  const m=store.get();
+  m.seen[q.id]=true;
+  if(idx===q.answer)m.correct[q.id]=true;
+  store.save(m);
+  if(s.mode==='exam'){
+    // auto-advance feel: just re-render (no explanation in exam)
+    if(s.i<s.qs.length-1){s.i++;runQuestion();}
+    else runQuestion();
+  }else{
+    runQuestion();
+  }
+}
+function go(d){
+  const s=session;
+  s.i=Math.max(0,Math.min(s.qs.length-1,s.i+d));
+  runQuestion();
+}
+
+function exitQuiz(){
+  const s=session;
+  const answered=Object.keys(s.answers).length;
+  const msg = s.mode==='exam'
+    ? `Thoát bài thi thử? Bạn đã trả lời ${answered}/${s.qs.length} câu.\nBài thi sẽ KHÔNG được lưu nếu bạn thoát bây giờ.`
+    : `Thoát luyện tập? Bạn đã trả lời ${answered}/${s.qs.length} câu.\nCác câu đã đúng vẫn được lưu vào tiến độ.`;
+  if(confirm(msg)){
+    clearInterval(timerHandle);
+    if('speechSynthesis' in window) window.speechSynthesis.cancel();
+    session=null;
+    window.close();
+    // If the browser blocks window.close() (tab wasn't opened by script),
+    // show a clear "you can close this tab" screen instead of silently doing nothing.
+    setTimeout(()=>{
+      app.innerHTML=`
+      <div class="card" style="text-align:center">
+        <h2>Đã thoát</h2>
+        <p class="lead">Bạn có thể đóng tab/trang này ngay bây giờ.</p>
+        <p class="small">(Trình duyệt không cho phép tự động đóng tab này — vui lòng đóng thủ công.)</p>
+      </div>`;
+    },150);
+  }
+}
+
+// =================== RESULTS ===================
+function finishPractice(){
+  const s=session;
+  const total=s.qs.length;
+  const correct=s.qs.filter(q=>s.answers[q.id]===q.answer).length;
+  const pct=Math.round(correct/total*100);
+  let review='';
+  s.qs.forEach((q,n)=>{
+    const you=s.answers[q.id], ok=you===q.answer;
+    review+=`<div class="review-q">${n+1}. ${q.q} <span class="badge">${ok?'✓':'✗'}</span></div>`;
+    if(!ok){
+      review+=`<div class="review-a you">Bạn chọn: ${String.fromCharCode(65+you)}. ${q.options[you]}</div>`;
+      review+=`<div class="review-a corr">Đúng: ${String.fromCharCode(65+q.answer)}. ${q.options[q.answer]}</div>`;
+      review+=`<div class="exp show" style="margin-top:6px">${q.exp}</div>`;
+    }
+  });
+  app.innerHTML=`
+  <div class="card">
+    <h2>Kết quả luyện tập</h2>
+    <div class="score-big">${correct}/${total}</div>
+    <div class="score-lbl">${pct}% đúng</div>
+    <button class="btn" onclick="home()">‹ Về trang chính</button>
+  </div>
+  <div class="card"><h2>Xem lại câu sai</h2>
+    ${s.qs.filter(q=>s.answers[q.id]!==q.answer).length===0?'<p class="lead">🎉 Bạn trả lời đúng hết! Xuất sắc.</p>':review}
+  </div>`;
+  window.scrollTo(0,0);
+}
+
+function finishExam(){
+  clearInterval(timerHandle);
+  const s=session;
+  // fill unanswered as wrong
+  const valuesQs=s.qs.filter(q=>q.cat==='values');
+  const valuesCorrect=valuesQs.filter(q=>s.answers[q.id]===q.answer).length;
+  const totalCorrect=s.qs.filter(q=>s.answers[q.id]===q.answer).length;
+  const passOverall=totalCorrect>=15;
+  const passValues=valuesCorrect===valuesQs.length && valuesQs.length>0;
+  const passed=passOverall&&passValues;
+
+  const m=store.get();
+  m.examCount++;
+  if(m.bestExam==null||totalCorrect>m.bestExam)m.bestExam=totalCorrect;
+  store.save(m);
+
+  // per category
+  const byCat={};
+  s.qs.forEach(q=>{
+    byCat[q.cat]=byCat[q.cat]||{c:0,t:0};
+    byCat[q.cat].t++;
+    if(s.answers[q.id]===q.answer)byCat[q.cat].c++;
+  });
+  let catRows='';
+  for(const c in byCat){
+    catRows+=`<div class="rescat"><span>${CATS[c].vi}</span><b>${byCat[c].c}/${byCat[c].t}</b></div>`;
+  }
+
+  let review='';
+  s.qs.forEach((q,n)=>{
+    const you=s.answers[q.id];
+    const ok=you===q.answer;
+    review+=`<div class="review-q">${n+1}. ${q.q} <span class="badge" style="${q.cat==='values'?'background:#fbeecf;color:#8a6d12':''}">${ok?'✓':'✗'}${q.cat==='values'?' ★':''}</span></div>`;
+    if(!ok){
+      review+=`<div class="review-a you">Bạn chọn: ${you!==undefined?String.fromCharCode(65+you)+'. '+q.options[you]:'(bỏ trống)'}</div>`;
+      review+=`<div class="review-a corr">Đúng: ${String.fromCharCode(65+q.answer)}. ${q.options[q.answer]}</div>`;
+      review+=`<div class="exp show" style="margin-top:6px">${q.exp}</div>`;
+    }
+  });
+
+  app.innerHTML=`
+  <div class="card">
+    <h2>Kết quả Thi thử</h2>
+    <div class="score-big">${totalCorrect}/20</div>
+    <div class="score-lbl">${Math.round(totalCorrect/20*100)}% · Values ${valuesCorrect}/${valuesQs.length}</div>
+    <div class="verdict ${passed?'pass':'fail'}">${passed?'✓ ĐẬU (PASS)':'✗ CHƯA ĐẬU (FAIL)'}</div>
+    <div class="stat"><span>Tổng thể (cần ≥15/20)</span><b style="color:${passOverall?'#2e8b57':'#c0392b'}">${passOverall?'Đạt':'Chưa đạt'} — ${totalCorrect}/20</b></div>
+    <div class="stat"><span>Values (cần 5/5)</span><b style="color:${passValues?'#2e8b57':'#c0392b'}">${passValues?'Đạt':'Chưa đạt'} — ${valuesCorrect}/${valuesQs.length}</b></div>
+    ${!passValues?'<p class="small" style="color:#c0392b">⚠ Sai phần Values là tự động rớt, dù tổng điểm cao. Hãy luyện lại phần ⭐ Values.</p>':''}
+    <button class="btn" style="margin-top:12px" onclick="startExam()">🔁 Thi lại</button>
+    <button class="btn alt" onclick="home()">‹ Về trang chính</button>
+  </div>
+  <div class="card"><h2>Điểm theo phần</h2>${catRows}</div>
+  <div class="card"><h2>Xem lại câu sai</h2>
+    ${s.qs.filter(q=>s.answers[q.id]!==q.answer).length===0?'<p class="lead">🎉 Đúng cả 20 câu — hoàn hảo!</p>':review}
+  </div>`;
+  window.scrollTo(0,0);
+}
+
+home();
+</script>
+</body>
+</html>
